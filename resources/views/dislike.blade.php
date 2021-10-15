@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container" id="app">
-    <h1 class="mb-4 text-center">食材管理</h1>
+    <h1 class="mb-4 text-center">非表示食材</h1>
     <h3 class="categories__head mb-4">カテゴリ選択</h3>
     <div class="categories">
         @foreach ($categories as $c)

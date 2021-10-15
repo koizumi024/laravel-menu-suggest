@@ -26,86 +26,47 @@
 </head>
 <body>
     <div id="app" class="bg-app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" 
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" 
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
 
         <main class="py-4">
             @yield('content')
         </main>
+        
         <footer class="d-flex justify-content-around align-items-center">
             <a href="{{ route('material') }}">
                 <div class="footer__tab">
-                    <i class="fas fa-list footer__icon"></i>
-                    <div class="footer__text">食材管理</div>
+                    @if (Request::routeIs('material'))
+                        <i class="fas fa-list footer__icon active"></i>
+                        <div class="footer__text active">食材管理</div>
+                    @else
+                        <i class="fas fa-list footer__icon"></i>
+                        <div class="footer__text">食材管理</div>
+                    @endif
                 </div>
             </a>
             <a href="{{ route('suggest') }}">
                 <div class="footer__tab">
+                    @if (Request::routeIs('suggest'))
+                        <i class="fas fa-utensils footer__icon active"></i>
+                        <div class="footer__text active">メニュー提案</div>
+                    @else
                     <i class="fas fa-utensils footer__icon"></i>
                     <div class="footer__text">メニュー提案</div>
+                    @endif
                 </div>
             </a>
             <a href="{{ route('user') }}">
                 <div class="footer__tab">
-                    <i class="fas fa-user footer__icon"></i>
-                    <div class="footer__text">ユーザー設定</div>
+                    @if (Request::routeIs('user'))
+                        <i class="fas fa-user footer__icon active"></i>
+                        <div class="footer__text active">ユーザー設定</div>
+                    @else
+                        <i class="fas fa-user footer__icon"></i>
+                        <div class="footer__text">ユーザー設定</div>
+                    @endif
                 </div>
             </a>
         </footer>
-
+        
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.min.js"></script>
     <script>

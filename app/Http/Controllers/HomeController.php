@@ -30,7 +30,7 @@ class HomeController extends Controller
         $materials = Material::select('materials.*')->get();
 
         #ユーザーの持つ食材を取得
-        $user_materials = UserMaterial::where('user_id', '=', \Auth::id())->get();
+        $user_materials = UserMaterial::where('user_id', '=', \Auth::id())->whereNull('deleted_at')->get();
         $include_materials = [];
         foreach($user_materials as $u){
             array_push($include_materials, $u['material_id']);
@@ -43,7 +43,7 @@ class HomeController extends Controller
     {
         $posts = $request->all();
         // dd($posts);
-        UserMaterial::where('user_id', '=', \Auth::id())->delete();
+        UserMaterial::where('user_id', '=', \Auth::id())->whereNull('deleted_at')->delete();
         
         foreach($posts['materials_id'] as $mid){
             UserMaterial::insert(['material_id' => $mid, 'user_id' => \Auth::id()]);

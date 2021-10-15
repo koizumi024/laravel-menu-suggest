@@ -34,6 +34,10 @@ footer {
   }
 }
 
+footer a:hover {
+  text-decoration: none;
+}
+
 .footer__tab {
   text-align: center;
   padding: 20px 30px;
@@ -45,6 +49,10 @@ footer {
   font-size: 45px;
 }
 
+.footer__icon.active, .footer__text.active {
+  color: orange;
+}
+
 .footer__text {
   color: #787878;
   font-size: 0.88em;
@@ -53,6 +61,14 @@ footer {
 .categories {
   overflow: hidden;
   margin: 0 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .categories__head {

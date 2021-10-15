@@ -42,3 +42,30 @@ function selectMaterial5(){
             element.className = 'materials__border-active';
     }
 }
+
+function selectMaterial6(){
+    let element = document.getElementById(6);
+        if (checkbox6.checked){
+            element.className = 'materials__border';
+        } else {
+            element.className = 'materials__border-active';
+    }
+}
+
+function selectMaterial7(){
+    let element = document.getElementById(7);
+        if (checkbox7.checked){
+            element.className = 'materials__border';
+        } else {
+            element.className = 'materials__border-active';
+    }
+}
+
+function selectMaterial8(){
+    let element = document.getElementById(8);
+        if (checkbox8.checked){
+            element.className = 'materials__border';
+        } else {
+            element.className = 'materials__border-active';
+    }
+}
