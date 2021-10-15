@@ -51,11 +51,20 @@ class HomeController extends Controller
         return redirect( route('material') );
     }
 
+    public function suggest(){
+        $user_materials = UserMaterial::where('user_id', '=', \Auth::id())->whereNull('deleted_at')->get();
+        $include_materials = [];
+        foreach($user_materials as $u){
+            array_push($include_materials, $u['material_id']);
+        }
+        $count = count($include_materials);
+
+        return view('suggest', compact('count'));
+    }
+
     public function user(){
         return view('user');
     }
 
-    public function suggest(){
-        return view('suggest');
-    }
+
 }

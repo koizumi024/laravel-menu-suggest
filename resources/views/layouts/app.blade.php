@@ -31,7 +31,7 @@
             @yield('content')
         </main>
         
-        <footer class="d-flex justify-content-around align-items-center">
+        <footer>
             <a href="{{ route('material') }}">
                 <div class="footer__tab">
                     @if (Request::routeIs('material'))

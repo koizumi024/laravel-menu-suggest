@@ -3,7 +3,7 @@
 @section('content')
 <div class="container" id="app">
     <h1 class="mb-4 text-center">食材管理</h1>
-    <h3 class="categories__head mb-4">カテゴリ選択</h3>
+    <h3 class="head-text mb-4">カテゴリ選択</h3>
     <div class="categories">
         @foreach ($categories as $c)
         <input type="radio" class="d-none" id="tab{{ $c['id'] }}"
@@ -25,8 +25,7 @@
                         <div class="{{ in_array($m['id'], $include_materials) ? 'materials__border-active' : 'materials__border' }}"
                         id="{{ $m['id'] }}">
                             <label for="checkbox{{ $m['id'] }}" onClick="selectMaterial{{ $m['id'] }}()">
-                                <img src="{{ asset('img/materials/tamanegi.png') }}" 
-                                alt="" height=110 width=110>
+                                <img src="https://kohacu.com/wp-content/uploads/2019/05/kohacu.com_000737_20180304_v2.png" alt="" class="material__img">
                             </label>
                         </div>
                         <li class="material__name">{{ $m['material'] }}</li>
@@ -37,6 +36,5 @@
         @endforeach
         <button type="submit" class="btn btn-primary material__submitBtn">登録する</button>
     </form>
-    
 </div>
 @endsection

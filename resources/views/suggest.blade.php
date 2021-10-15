@@ -2,8 +2,17 @@
 
 @section('content')
 <div class="container" id="app">
-    <h1 class="mb-4 text-center">レシピ提案</h1>
+    <h1 class="mb-2 text-center">レシピ提案</h1>
     
-    <button class="btn btn-primary">メニューを探す</button>
+    <li class="head-text mb-4">（5個以上の食材を登録していない場合、利用できません）</li>
+    <div class="text-center mb-4">現在登録されている食材数: {{ $count }} </div>
+    <div class="text-center">
+        <a href="{{ route('material') }}">
+            <button class="btn btn-secondary">食材を追加する</button>
+        </a>
+        @if ( $count >= 5 )
+            <button class="btn btn-primary">メニューを探す</button>
+        @endif
+    </div>
 </div>
 @endsection

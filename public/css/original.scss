@@ -27,8 +27,12 @@ body::-webkit-scrollbar {
   }
 .bg-app{
     background-color: $beige;
+    min-height: calc( 100vh - 120px);
 }
 footer{
+    display:flex;
+    justify-content: space-evenly;
+    align-items: center;
     position: fixed;
     background-color: $black;
     bottom: 0;
@@ -38,7 +42,6 @@ footer{
 
     @media (max-width: 600px) {
         width: 100vw;
-    
     }
 }
 footer a:hover{
@@ -47,7 +50,7 @@ footer a:hover{
 .footer__tab{
     text-align: center;
     padding: 20px 30px;
-    border: 1px solid red;
+    // border: 1px solid red;
 }
 .footer__icon{
     color: $grey;
@@ -60,6 +63,10 @@ footer a:hover{
     color: $grey;
     font-size: $font-s;
 }
+.head-text{
+    font-size: $font-s;
+    text-align: center;
+}
 
 // Materials
 .categories {
@@ -69,11 +76,6 @@ footer a:hover{
     flex-wrap: wrap;
     justify-content: center;
 }
-.categories__head{
-    font-size: $font-s;
-    text-align: center;
-}
-
 .categories label {
     font-size: 0.95em;
     float: left;
@@ -84,7 +86,6 @@ footer a:hover{
     cursor: pointer;
     transition: .5s;
 }
-
 .categories li.active,
 .categories :checked + label {
     background-color: $black;
@@ -106,6 +107,10 @@ footer a:hover{
 .materials__content{
     margin: 8px 10px;
 }
+.material__img{
+    width: 110px;
+    height: 110px;
+}
 .materials__border{
     border: 7px solid $grey;
     border-radius: 50%;
@@ -125,5 +130,4 @@ footer a:hover{
 .material__submitBtn{
     position: fixed;
     bottom: 130px;
-    
 }

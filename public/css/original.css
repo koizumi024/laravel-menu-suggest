@@ -17,9 +17,19 @@ body::-webkit-scrollbar {
 
 .bg-app {
   background-color: #EBE7D2;
+  min-height: calc( 100vh - 120px);
 }
 
 footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   position: fixed;
   background-color: #222222;
   bottom: 0;
@@ -41,7 +51,6 @@ footer a:hover {
 .footer__tab {
   text-align: center;
   padding: 20px 30px;
-  border: 1px solid red;
 }
 
 .footer__icon {
@@ -58,6 +67,11 @@ footer a:hover {
   font-size: 0.88em;
 }
 
+.head-text {
+  font-size: 0.88em;
+  text-align: center;
+}
+
 .categories {
   overflow: hidden;
   margin: 0 5px;
@@ -69,11 +83,6 @@ footer a:hover {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-}
-
-.categories__head {
-  font-size: 0.88em;
-  text-align: center;
 }
 
 .categories label {
@@ -115,6 +124,11 @@ footer a:hover {
 
 .materials__content {
   margin: 8px 10px;
+}
+
+.material__img {
+  width: 110px;
+  height: 110px;
 }
 
 .materials__border {
