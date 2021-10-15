@@ -1,0 +1,127 @@
+@import url("https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap");
+body {
+  font-family: 'Kiwi Maru', serif;
+  color: #222222;
+  font-size: 1.2em;
+  overflow: scroll;
+  -ms-overflow-style: none;
+  /* IE, Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+body::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari */
+}
+
+.bg-app {
+  background-color: #EBE7D2;
+}
+
+footer {
+  position: fixed;
+  background-color: #222222;
+  bottom: 0;
+  width: 600px;
+  height: 120px;
+  opacity: 0.97;
+}
+
+@media (max-width: 600px) {
+  footer {
+    width: 100vw;
+  }
+}
+
+.footer__tab {
+  text-align: center;
+  padding: 20px 30px;
+  border: 1px solid red;
+}
+
+.footer__icon {
+  color: #787878;
+  font-size: 45px;
+}
+
+.footer__text {
+  color: #787878;
+  font-size: 0.88em;
+}
+
+.categories {
+  overflow: hidden;
+  margin: 0 5px;
+}
+
+.categories__head {
+  font-size: 0.88em;
+  text-align: center;
+}
+
+.categories label {
+  font-size: 0.95em;
+  float: left;
+  border-radius: 40px;
+  margin: 5px 5px;
+  padding: 7px 20px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
+.categories li.active,
+.categories :checked + label {
+  background-color: #222222;
+  border-color: #222222;
+  color: #fff;
+  cursor: auto;
+}
+
+.materials {
+  margin-top: 25px;
+  margin-bottom: 160px;
+}
+
+.materials__wrap {
+  text-align: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.materials__content {
+  margin: 8px 10px;
+}
+
+.materials__border {
+  border: 7px solid #787878;
+  border-radius: 50%;
+  width: 125px;
+  opacity: .5;
+}
+
+.materials__border-active {
+  border: 7px solid #84d150;
+  border-radius: 50%;
+  width: 125px;
+}
+
+.material__name {
+  color: #222222;
+  margin-top: 1px;
+  font-size: 0.88em;
+}
+
+.material__submitBtn {
+  position: fixed;
+  bottom: 130px;
+}
+/*# sourceMappingURL=original.css.map */

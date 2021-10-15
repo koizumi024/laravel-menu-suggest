@@ -1,0 +1,120 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap');
+
+// SCSS Colors
+$white: #fff;
+$beige: #EBE7D2;
+$green: #84d150;
+$orange: #F59600;
+$l-grey: #ccc;
+$grey: #787878;
+$black: #222222;
+
+// SCSS Font Size
+$font-s: 0.88em;
+
+// General
+body{
+    font-family: 'Kiwi Maru', serif;
+    color: $black;
+    font-size: 1.2em;
+    overflow: scroll;
+    -ms-overflow-style: none;    /* IE, Edge */
+    scrollbar-width: none;      /* Firefox */
+}
+body::-webkit-scrollbar {
+    display:none;   /* Chrome, Safari */
+  }
+.bg-app{
+    background-color: $beige;
+}
+footer{
+    position: fixed;
+    background-color: $black;
+    bottom: 0;
+    width: 600px;
+    height: 120px;
+    opacity: 0.97;
+
+    @media (max-width: 600px) {
+        width: 100vw;
+    
+    }
+}
+.footer__tab{
+    text-align: center;
+    padding: 20px 30px;
+    border: 1px solid red;
+}
+.footer__icon{
+    color: $grey;
+    font-size: 45px;
+}
+.footer__text{
+    color: $grey;
+    font-size: $font-s;
+}
+
+// Materials
+.categories {
+    overflow: hidden;
+    margin: 0 5px;
+}
+.categories__head{
+    font-size: $font-s;
+    text-align: center;
+}
+
+.categories label {
+    font-size: 0.95em;
+    float: left;
+    border-radius: 40px;
+    margin: 5px 5px;
+    padding: 7px 20px;
+    border: 1px solid $l-grey;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.categories li.active,
+.categories :checked + label {
+    background-color: $black;
+    border-color: $black;
+    color: $white;
+    cursor: auto;
+}
+
+.materials{
+    margin-top: 25px;
+    margin-bottom: 160px;
+}
+.materials__wrap{
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+.materials__content{
+    margin: 8px 10px;
+}
+.materials__border{
+    border: 7px solid $grey;
+    border-radius: 50%;
+    width: 125px;
+    opacity: .5;
+}
+.materials__border-active{
+    border: 7px solid $green;
+    border-radius: 50%;
+    width: 125px;
+}
+.material__name{
+    color: $black;
+    margin-top: 1px;
+    font-size: $font-s;
+}
+.material__submitBtn{
+    position: fixed;
+    bottom: 130px;
+    
+}
