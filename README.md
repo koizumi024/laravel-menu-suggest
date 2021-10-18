@@ -1,3 +1,3 @@
 ## メニュー提案アプリケーション
 
-[データベース構造（ER図）](https://dbdiagram.io/d/60bdb1efb29a09603d183ab7)
+[データベース構造（ER図）](https://dbdiagram.io/d/6140e22b825b5b0146021232)
