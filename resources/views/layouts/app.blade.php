@@ -56,7 +56,7 @@
             </a>
             <a href="{{ route('user') }}">
                 <div class="footer__tab">
-                    @if (Request::routeIs('user'))
+                    @if (Request::routeIs('user') || Request::routeIs('dislike'))
                         <i class="fas fa-user footer__icon active"></i>
                         <div class="footer__text active">ユーザー設定</div>
                     @else

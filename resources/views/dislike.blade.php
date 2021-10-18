@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="container" id="app">
-    <h1 class="mb-4 text-center">非表示食材</h1>
-    <h3 class="categories__head mb-4">カテゴリ選択</h3>
+    <h1 class="mb-4 text-center">非表示食材の管理</h1>
+    <h3 class="head-text mb-4">カテゴリ選択</h3>
     <div class="categories">
         @foreach ($categories as $c)
         <input type="radio" class="d-none" id="tab{{ $c['id'] }}"
@@ -12,17 +12,16 @@
         @endforeach 
     </div>
 
-    <form class="materials" action="{{ route('store') }}" method="POST">
+    <form class="materials" action="{{ route('dstore') }}" method="POST">
         @csrf
         @foreach ($categories as $c)
         <div class="materials__wrap" v-bind:class="isActive == {{ $c['id'] }} ? '' : 'd-none' ">
-            @foreach ($materials as $m)
+            @foreach ($materials_all as $m)
                 @if($m['category_id'] == $c['id'])
-                    <input type="checkbox" name="materials_id[]" class="d-none"
-                    id="checkbox{{ $m['id'] }}" value={{ $m['id'] }} 
-                    {{ in_array($m['id'], $include_materials) ? 'checked' : '' }}>
+                    <input type="checkbox" name="materials_id[]" class="d-none" id="checkbox{{ $m['id'] }}"
+                    value="{{ $m['id'] }}" {{ in_array($m['id'], $exclude_materials) ? 'checked' : '' }}>
                     <div class="materials__content">
-                        <div class="{{ in_array($m['id'], $include_materials) ? 'materials__border-active' : 'materials__border' }}"
+                        <div class="{{ in_array($m['id'], $exclude_materials) ? 'materials__border-active' : 'materials__border' }}"
                         id="{{ $m['id'] }}">
                             <label for="checkbox{{ $m['id'] }}" onClick="selectMaterial{{ $m['id'] }}()">
                                 <img src="{{ asset('img/materials/tamanegi.png') }}" 
