@@ -168,3 +168,39 @@ function selectMaterial29(){
             element.className = 'materials__border-active';
     }
 }
+
+function selectMaterial30(){
+    let element = document.getElementById(30);
+        if (checkbox30.checked){
+            element.className = 'materials__border';
+        } else {
+            element.className = 'materials__border-active';
+    }
+}
+
+function selectMaterial33(){
+    let element = document.getElementById(33);
+        if (checkbox33.checked){
+            element.className = 'materials__border';
+        } else {
+            element.className = 'materials__border-active';
+    }
+}
+
+function selectMaterial39(){
+    let element = document.getElementById(39);
+        if (checkbox39.checked){
+            element.className = 'materials__border';
+        } else {
+            element.className = 'materials__border-active';
+    }
+}
+
+function selectMaterial43(){
+    let element = document.getElementById(43);
+        if (checkbox43.checked){
+            element.className = 'materials__border';
+        } else {
+            element.className = 'materials__border-active';
+    }
+}

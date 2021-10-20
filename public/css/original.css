@@ -59,7 +59,7 @@ footer a:hover {
 }
 
 .footer__icon.active, .footer__text.active {
-  color: orange;
+  color: #F59600;
 }
 
 .footer__text {

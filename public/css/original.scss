@@ -50,14 +50,14 @@ footer a:hover{
 .footer__tab{
     text-align: center;
     padding: 20px 30px;
-    // border: 1px solid red;
+    //border: 1px solid red;
 }
 .footer__icon{
     color: $grey;
     font-size: 45px;
 }
-.footer__icon.active,.footer__text.active{
-    color:orange;
+.footer__icon.active, .footer__text.active{
+    color:$orange;
 }
 .footer__text{
     color: $grey;

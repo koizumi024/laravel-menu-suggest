@@ -21,7 +21,7 @@
                     <input type="checkbox" name="materials_id[]" class="d-none"
                     id="checkbox{{ $m['id'] }}" value={{ $m['id'] }} 
                     {{ in_array($m['id'], $include_materials) ? 'checked' : '' }}>
-                    <div class="materials__content">
+                    <div class="materials__content {{ in_array($m['id'], $exclude_materials) ? 'd-none' : '' }}">
                         <div class="{{ in_array($m['id'], $include_materials) ? 'materials__border-active' : 'materials__border' }}"
                         id="{{ $m['id'] }}">
                             <label for="checkbox{{ $m['id'] }}" onClick="selectMaterial{{ $m['id'] }}()">

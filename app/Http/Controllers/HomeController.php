@@ -29,7 +29,7 @@ class HomeController extends Controller
     {
         #カテゴリ一覧を取得
         $categories = Category::select('categories.*')->get();
-        #(WIP)非表示設定になっていない食材一覧を取得
+        #食材一覧を取得
         $materials = Material::select('materials.*')->get();
 
         #ユーザーの持つ食材をDBから取得
@@ -42,7 +42,17 @@ class HomeController extends Controller
             array_push($include_materials, $u['material_id']);
         }
 
-        return view('material', compact('categories', 'materials', 'include_materials'));
+        #非表示食材を取得
+        $hidden_materials = UserMaterial::where('user_id', '=', \Auth::id())
+        ->whereNotNull('deleted_at')
+        ->get();
+        #viewに渡す用の配列
+        $exclude_materials = [];
+        foreach($hidden_materials as $h){
+            array_push($exclude_materials, $h['material_id']);
+        }
+
+        return view('material', compact('categories', 'materials', 'include_materials', 'exclude_materials'));
     }
 
     public function store(Request $request)
