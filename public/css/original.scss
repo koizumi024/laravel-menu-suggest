@@ -108,11 +108,11 @@ footer a:hover{
 }
 .footer__tab{
     text-align: center;
-    padding: 20px 30px;
+    padding: 20px 20px;
 }
 .footer__icon{
     color: $grey;
-    font-size: 45px;
+    font-size: 43px;
 }
 .footer__icon.active, .footer__text.active{
     color:$white;
@@ -129,7 +129,7 @@ footer a:hover{
 // Materials
 .categories {
     overflow: hidden;
-    margin: 0 5px;
+    margin: 0 10px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -154,7 +154,9 @@ footer a:hover{
 
 .materials{
     margin-top: 25px;
-    margin-bottom: 160px;
+    margin-right: 15px;
+    margin-left: 15px;
+    margin-bottom: 180px;
 }
 .materials__wrap{
     text-align: center;
@@ -186,8 +188,9 @@ footer a:hover{
     font-size: $font-s;
 }
 .material__submitBtn{
+    margin: 20px;
     position: fixed;
-    bottom: 135px;
+    bottom: 120px;
     width: 560px;
     color: $white;
     background-color: $aqua;
@@ -197,15 +200,16 @@ footer a:hover{
     transition: 0.2s all;
 
     @media (max-width: 600px) {
-        width: 92vw;
+        width: 90vw;
     }
 }
 .material__submitBtn:hover{
     background-color: #54ceb7;
 }
 .material__submitBtn-hidden{
+    margin: 20px;
     position: fixed;
-    bottom: 135px;
+    bottom: 120px;
     width: 560px;
     color: $white;
     background-color: #e76565;
@@ -215,7 +219,7 @@ footer a:hover{
     transition: 0.2s all;
 
     @media (max-width: 600px) {
-        width: 92vw;
+        width: 90vw;
     }
 }
 .material__submitBtn-hidden:hover{

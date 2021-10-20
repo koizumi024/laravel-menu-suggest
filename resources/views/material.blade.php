@@ -33,9 +33,9 @@
                     </div>
                 @endif
             @endforeach
+            <button type="submit" class="material__submitBtn">追加する</button>
         </div> 
         @endforeach
-        <button type="submit" class="material__submitBtn">追加する</button>
     </form>
 </div>
 @endsection

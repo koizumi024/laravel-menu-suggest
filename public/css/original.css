@@ -147,12 +147,12 @@ footer a:hover {
 
 .footer__tab {
   text-align: center;
-  padding: 20px 30px;
+  padding: 20px 20px;
 }
 
 .footer__icon {
   color: #656565;
-  font-size: 45px;
+  font-size: 43px;
 }
 
 .footer__icon.active, .footer__text.active {
@@ -171,7 +171,7 @@ footer a:hover {
 
 .categories {
   overflow: hidden;
-  margin: 0 5px;
+  margin: 0 10px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -204,7 +204,9 @@ footer a:hover {
 
 .materials {
   margin-top: 25px;
-  margin-bottom: 160px;
+  margin-right: 15px;
+  margin-left: 15px;
+  margin-bottom: 180px;
 }
 
 .materials__wrap {
@@ -248,8 +250,9 @@ footer a:hover {
 }
 
 .material__submitBtn {
+  margin: 20px;
   position: fixed;
-  bottom: 135px;
+  bottom: 120px;
   width: 560px;
   color: #fff;
   background-color: #41C5AD;
@@ -263,7 +266,7 @@ footer a:hover {
 
 @media (max-width: 600px) {
   .material__submitBtn {
-    width: 92vw;
+    width: 90vw;
   }
 }
 
@@ -272,8 +275,9 @@ footer a:hover {
 }
 
 .material__submitBtn-hidden {
+  margin: 20px;
   position: fixed;
-  bottom: 135px;
+  bottom: 120px;
   width: 560px;
   color: #fff;
   background-color: #e76565;
@@ -287,7 +291,7 @@ footer a:hover {
 
 @media (max-width: 600px) {
   .material__submitBtn-hidden {
-    width: 92vw;
+    width: 90vw;
   }
 }
 

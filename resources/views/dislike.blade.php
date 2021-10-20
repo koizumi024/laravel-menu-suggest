@@ -32,9 +32,9 @@
                     </div>
                 @endif
             @endforeach
+            <button type="submit" class="material__submitBtn-hidden">非表示にする</button>
         </div> 
         @endforeach
-        <button type="submit" class="material__submitBtn-hidden">非表示にする</button>
     </form>
     
 </div>

@@ -28,18 +28,20 @@
     <div id="app" class="bg-app">
         {{-- 浮かせて表示＋自動でフェードアウトするメッセージ --}}
         @if (Session::has('successMessage'))
-        <div class="message__box">
-            <i class="fas fa-check message__icon"></i>
-            <div class="message__text">
-                {{ session('successMessage') }}
+            <div class="message__box">
+                <i class="fas fa-check message__icon"></i>
+                <div class="message__text">
+                    {{ session('successMessage') }}
+                </div>
             </div>
-        </div>
         @endif
 
-        <main class="p-4">
+        {{-- ルートによってビューを差し込む部分 --}}
+        <main class="py-4">
             @yield('content')
         </main>
         
+        {{-- ルートによってアクティブなタブの色を変えるフッター --}}
         <footer>
             @if (Request::routeIs('material'))
                 <div class="footer__tab">
