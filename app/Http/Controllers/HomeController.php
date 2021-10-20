@@ -36,7 +36,8 @@ class HomeController extends Controller
         $user_materials = UserMaterial::where('user_id', '=', \Auth::id())
             ->whereNull('deleted_at')
             ->get();
-        #viewに渡す用の配列
+
+        #チェックボックス用の配列
         $include_materials = [];
         foreach($user_materials as $u){
             array_push($include_materials, $u['material_id']);
@@ -64,11 +65,14 @@ class HomeController extends Controller
                 ->whereNull('deleted_at')
                 ->delete();
             
-            foreach($posts['materials_id'] as $mid){
-                UserMaterial::insert(['material_id' => $mid, 'user_id' => \Auth::id()]);
+            #食材を追加（食材が１つもなければ追加する処理はしないので分岐）
+            if(isset($posts['materials_id'])){
+                foreach($posts['materials_id'] as $mid){
+                    UserMaterial::insert(['material_id' => $mid, 'user_id' => \Auth::id()]);
+                }
             }
         });
-        return redirect( route('material') );
+        return redirect( route('material') )->with('successMessage', '食材を更新しました');
     }
 
     public function suggest()
@@ -76,10 +80,12 @@ class HomeController extends Controller
         $user_materials = UserMaterial::where('user_id', '=', \Auth::id())
             ->whereNull('deleted_at')
             ->get();
+
         $include_materials = [];
         foreach($user_materials as $u){
             array_push($include_materials, $u['material_id']);
         }
+        #今持っている食材の数
         $count = count($include_materials);
 
         return view('suggest', compact('count'));
@@ -120,11 +126,13 @@ class HomeController extends Controller
                 ->whereNotNull('deleted_at')
                 ->delete();
             
-            #非表示食材の追加
-            foreach($posts['materials_id'] as $mid){
-                UserMaterial::insert(['material_id' => $mid, 'user_id' => \Auth::id(), 'deleted_at' => date("Y-m-d H:i:s", time())]);
+            #非表示食材の追加（食材が１つもなければ追加する処理はしないので分岐）
+            if(isset($posts['materials_id'])){
+                foreach($posts['materials_id'] as $mid){
+                    UserMaterial::insert(['material_id' => $mid, 'user_id' => \Auth::id(), 'deleted_at' => date("Y-m-d H:i:s", time())]);
+                }
             }
         });
-        return redirect( route('dislike') );
+        return redirect( route('dislike') )->with('successMessage', '非表示にする食材を更新しました');
     }
 }

@@ -10,6 +10,7 @@
         <a href="{{ route('material') }}">
             <button class="btn btn-secondary">食材を追加する</button>
         </a>
+        {{-- 条件を満たしていたら、提案機能を使えるようにする --}}
         @if ( $count >= 5 )
             <button class="btn btn-primary">メニューを探す</button>
         @endif

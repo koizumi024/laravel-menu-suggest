@@ -1,8 +1,23 @@
 @import url("https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap");
+.material__submitBtn, .material__submitBtn-hidden {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}
+
 body {
   font-family: 'Kiwi Maru', serif;
   color: #222222;
   font-size: 1.2em;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   overflow: scroll;
   -ms-overflow-style: none;
   /* IE, Edge */
@@ -20,6 +35,88 @@ body::-webkit-scrollbar {
   min-height: calc( 100vh - 120px);
 }
 
+.message__box {
+  margin: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 10px 20px;
+  background: #fff;
+  -webkit-box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+          box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  width: 560px;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  opacity: 0;
+  -webkit-animation: box-fade 5s ease forwards;
+          animation: box-fade 5s ease forwards;
+  -webkit-transform: translateY(-150%);
+          transform: translateY(-150%);
+}
+
+@media (max-width: 600px) {
+  .message__box {
+    width: 92vw;
+    margin: 20px;
+  }
+}
+
+@-webkit-keyframes box-fade {
+  10% {
+    opacity: .95;
+    -webkit-transform: translateY(0%);
+            transform: translateY(0%);
+  }
+  75% {
+    opacity: .95;
+    -webkit-transform: translateY(0%);
+            transform: translateY(0%);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translateY(-150%);
+            transform: translateY(-150%);
+  }
+}
+
+@keyframes box-fade {
+  10% {
+    opacity: .95;
+    -webkit-transform: translateY(0%);
+            transform: translateY(0%);
+  }
+  75% {
+    opacity: .95;
+    -webkit-transform: translateY(0%);
+            transform: translateY(0%);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translateY(-150%);
+            transform: translateY(-150%);
+  }
+}
+
+.message__icon {
+  padding: 8px;
+  border-radius: 50%;
+  color: #9FF5E6;
+  background-color: #41C5AD;
+}
+
+.message__text {
+  margin-left: 15px;
+  color: #656565;
+}
+
 footer {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -35,7 +132,7 @@ footer {
   bottom: 0;
   width: 600px;
   height: 120px;
-  opacity: 0.97;
+  opacity: .99;
 }
 
 @media (max-width: 600px) {
@@ -54,16 +151,16 @@ footer a:hover {
 }
 
 .footer__icon {
-  color: #787878;
+  color: #656565;
   font-size: 45px;
 }
 
 .footer__icon.active, .footer__text.active {
-  color: #F59600;
+  color: #fff;
 }
 
 .footer__text {
-  color: #787878;
+  color: #656565;
   font-size: 0.88em;
 }
 
@@ -132,14 +229,14 @@ footer a:hover {
 }
 
 .materials__border {
-  border: 7px solid #787878;
+  border: 7px solid #ccc;
   border-radius: 50%;
   width: 125px;
   opacity: .5;
 }
 
 .materials__border-active {
-  border: 7px solid #84d150;
+  border: 7px solid #4CAF50;
   border-radius: 50%;
   width: 125px;
 }
@@ -152,6 +249,49 @@ footer a:hover {
 
 .material__submitBtn {
   position: fixed;
-  bottom: 130px;
+  bottom: 135px;
+  width: 560px;
+  color: #fff;
+  background-color: #41C5AD;
+  border-radius: 22px;
+  padding: 10px 20px;
+  -webkit-box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+          box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+  -webkit-transition: 0.2s all;
+  transition: 0.2s all;
+}
+
+@media (max-width: 600px) {
+  .material__submitBtn {
+    width: 92vw;
+  }
+}
+
+.material__submitBtn:hover {
+  background-color: #54ceb7;
+}
+
+.material__submitBtn-hidden {
+  position: fixed;
+  bottom: 135px;
+  width: 560px;
+  color: #fff;
+  background-color: #e76565;
+  border-radius: 22px;
+  padding: 10px 20px;
+  -webkit-box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+          box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+  -webkit-transition: 0.2s all;
+  transition: 0.2s all;
+}
+
+@media (max-width: 600px) {
+  .material__submitBtn-hidden {
+    width: 92vw;
+  }
+}
+
+.material__submitBtn-hidden:hover {
+  background-color: #e96d6d;
 }
 /*# sourceMappingURL=original.css.map */

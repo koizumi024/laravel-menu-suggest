@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container" id="app">
+
+<div id="app">
     <h1 class="mb-4 text-center">食材管理</h1>
     <h3 class="head-text mb-4">カテゴリ選択</h3>
     <div class="categories">
@@ -34,7 +35,7 @@
             @endforeach
         </div> 
         @endforeach
-        <button type="submit" class="btn btn-primary material__submitBtn">登録する</button>
+        <button type="submit" class="material__submitBtn">追加する</button>
     </form>
 </div>
 @endsection

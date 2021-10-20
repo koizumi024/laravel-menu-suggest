@@ -26,45 +26,62 @@
 </head>
 <body>
     <div id="app" class="bg-app">
+        {{-- 浮かせて表示＋自動でフェードアウトするメッセージ --}}
+        @if (Session::has('successMessage'))
+        <div class="message__box">
+            <i class="fas fa-check message__icon"></i>
+            <div class="message__text">
+                {{ session('successMessage') }}
+            </div>
+        </div>
+        @endif
 
-        <main class="py-4">
+        <main class="p-4">
             @yield('content')
         </main>
         
         <footer>
-            <a href="{{ route('material') }}">
+            @if (Request::routeIs('material'))
                 <div class="footer__tab">
-                    @if (Request::routeIs('material'))
-                        <i class="fas fa-list footer__icon active"></i>
-                        <div class="footer__text active">食材管理</div>
-                    @else
+                    <i class="fas fa-list footer__icon active"></i>
+                    <div class="footer__text active">食材管理</div>
+                </div>
+            @else
+                <a href="{{ route('material') }}">
+                    <div class="footer__tab">
                         <i class="fas fa-list footer__icon"></i>
                         <div class="footer__text">食材管理</div>
-                    @endif
-                </div>
-            </a>
-            <a href="{{ route('suggest') }}">
+                    </div>
+                </a>
+            @endif
+
+            @if (Request::routeIs('suggest'))
                 <div class="footer__tab">
-                    @if (Request::routeIs('suggest'))
-                        <i class="fas fa-utensils footer__icon active"></i>
-                        <div class="footer__text active">メニュー提案</div>
-                    @else
-                    <i class="fas fa-utensils footer__icon"></i>
-                    <div class="footer__text">メニュー提案</div>
-                    @endif
+                    <i class="fas fa-utensils footer__icon active"></i>
+                    <div class="footer__text active">メニュー提案</div>
                 </div>
-            </a>
-            <a href="{{ route('user') }}">
+            @else
+                <a href="{{ route('suggest') }}">
+                    <div class="footer__tab">
+                        <i class="fas fa-utensils footer__icon"></i>
+                        <div class="footer__text">メニュー提案</div>
+                    </div>
+                </a>
+            @endif
+
+            @if (Request::routeIs('user'))
                 <div class="footer__tab">
-                    @if (Request::routeIs('user') || Request::routeIs('dislike'))
-                        <i class="fas fa-user footer__icon active"></i>
-                        <div class="footer__text active">ユーザー設定</div>
-                    @else
+                    <i class="fas fa-user footer__icon active"></i>
+                    <div class="footer__text active">ユーザー設定</div>
+                </div>
+            @else
+                <a href="{{ route('user') }}">
+                    <div class="footer__tab">
                         <i class="fas fa-user footer__icon"></i>
                         <div class="footer__text">ユーザー設定</div>
-                    @endif
-                </div>
-            </a>
+                    </div>
+                </a>
+            @endif
         </footer>
         
     </div>

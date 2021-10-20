@@ -4,20 +4,33 @@
 // SCSS Colors
 $white: #fff;
 $beige: #EBE7D2;
-$green: #84d150;
+$green: #4CAF50;
+$aqua: #41C5AD;
 $orange: #F59600;
 $l-grey: #ccc;
-$grey: #787878;
+$grey: #656565;
 $black: #222222;
 
 // SCSS Font Size
 $font-s: 0.88em;
+
+// Reset
+.material__submitBtn, .material__submitBtn-hidden{
+    // reset
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding: 0;
+    appearance: none;
+}
 
 // General
 body{
     font-family: 'Kiwi Maru', serif;
     color: $black;
     font-size: 1.2em;
+    user-select: none;
     overflow: scroll;
     -ms-overflow-style: none;    /* IE, Edge */
     scrollbar-width: none;      /* Firefox */
@@ -29,6 +42,52 @@ body::-webkit-scrollbar {
     background-color: $beige;
     min-height: calc( 100vh - 120px);
 }
+.message__box{
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    background: $white;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    width: 560px;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    opacity: 0;
+    animation: box-fade 5s ease forwards;
+    transform: translateY(-150%);
+
+    @media (max-width: 600px) {
+        width: 92vw;
+        margin: 20px;
+    }
+}
+@keyframes box-fade {
+    10% {
+      opacity: .95;
+      transform: translateY(0%);
+    }
+    75% {
+        opacity: .95;
+        transform: translateY(0%);
+      }
+    100% {
+        opacity: 0;
+        transform: translateY(-150%);
+      }
+}
+.message__icon{
+    padding: 8px;
+    border-radius: 50%;
+    color: #9FF5E6;
+    background-color: $aqua;
+}
+.message__text{
+    margin-left: 15px;
+    color: $grey;
+}
 footer{
     display:flex;
     justify-content: space-evenly;
@@ -38,7 +97,7 @@ footer{
     bottom: 0;
     width: 600px;
     height: 120px;
-    opacity: 0.97;
+    opacity: .99;
 
     @media (max-width: 600px) {
         width: 100vw;
@@ -50,14 +109,13 @@ footer a:hover{
 .footer__tab{
     text-align: center;
     padding: 20px 30px;
-    //border: 1px solid red;
 }
 .footer__icon{
     color: $grey;
     font-size: 45px;
 }
 .footer__icon.active, .footer__text.active{
-    color:$orange;
+    color:$white;
 }
 .footer__text{
     color: $grey;
@@ -112,7 +170,7 @@ footer a:hover{
     height: 110px;
 }
 .materials__border{
-    border: 7px solid $grey;
+    border: 7px solid $l-grey;
     border-radius: 50%;
     width: 125px;
     opacity: .5;
@@ -129,5 +187,37 @@ footer a:hover{
 }
 .material__submitBtn{
     position: fixed;
-    bottom: 130px;
+    bottom: 135px;
+    width: 560px;
+    color: $white;
+    background-color: $aqua;
+    border-radius: 22px;
+    padding: 10px 20px;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+    transition: 0.2s all;
+
+    @media (max-width: 600px) {
+        width: 92vw;
+    }
+}
+.material__submitBtn:hover{
+    background-color: #54ceb7;
+}
+.material__submitBtn-hidden{
+    position: fixed;
+    bottom: 135px;
+    width: 560px;
+    color: $white;
+    background-color: #e76565;
+    border-radius: 22px;
+    padding: 10px 20px;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+    transition: 0.2s all;
+
+    @media (max-width: 600px) {
+        width: 92vw;
+    }
+}
+.material__submitBtn-hidden:hover{
+    background-color: #e96d6d;
 }
