@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap");
-.material__submitBtn, .material__submitBtn-hidden {
+.material__submitBtn, .material__submitBtn-hidden, .suggest__btn,
+.suggest__btn-secondary, .user__btn {
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -108,7 +109,7 @@ body::-webkit-scrollbar {
 .message__icon {
   padding: 8px;
   border-radius: 50%;
-  color: #9FF5E6;
+  color: #A0F7E7;
   background-color: #41C5AD;
 }
 
@@ -128,7 +129,7 @@ footer {
       -ms-flex-align: center;
           align-items: center;
   position: fixed;
-  background-color: #222222;
+  background-color: #F5BB44;
   bottom: 0;
   width: 600px;
   height: 120px;
@@ -297,5 +298,46 @@ footer a:hover {
 
 .material__submitBtn-hidden:hover {
   background-color: #e96d6d;
+}
+
+.suggest__btn {
+  border-radius: 20px;
+  margin: 10px;
+  padding: 10px 20px;
+  color: #fff;
+  background-color: #41C5AD;
+}
+
+.suggest__btn-secondary {
+  border-radius: 20px;
+  margin: 10px;
+  padding: 10px 20px;
+  color: #fff;
+  background-color: #656565;
+}
+
+.user__modal-overlay {
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  width: 600px;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.user__modal-content {
+  z-index: 2;
+  width: 82%;
+  padding: 1em;
+  background: #fff;
 }
 /*# sourceMappingURL=original.css.map */

@@ -71,15 +71,15 @@
                 </a>
             @endif
 
-            @if (Request::routeIs('user'))
+            @if (Request::routeIs('user') || (Request::routeIs('dislike')))
                 <div class="footer__tab">
-                    <i class="fas fa-user footer__icon active"></i>
+                    <i class="fas fa-user-cog footer__icon active"></i>
                     <div class="footer__text active">ユーザー設定</div>
                 </div>
             @else
                 <a href="{{ route('user') }}">
                     <div class="footer__tab">
-                        <i class="fas fa-user footer__icon"></i>
+                        <i class="fas fa-user-cog footer__icon"></i>
                         <div class="footer__text">ユーザー設定</div>
                     </div>
                 </a>
@@ -87,14 +87,31 @@
         </footer>
         
     </div>
+    {{--  Vue.jsを利用したタブメニュー （参考: https://qiita.com/mimoe/items/86d5312b3741320b717b) --}}
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.min.js"></script>
     <script>
         new Vue({
             el: '#app',
             data: {
                 isActive: '1',
-        }
-    })
+                showFavorite: false,
+                showUser: false,
+            },
+            methods:{
+                openFavorite: function(){
+                this.showFavorite = true
+                },
+                closeFavorite: function(){
+                this.showFavorite = false
+                },
+                openUser: function(){
+                this.showUser = true
+                },
+                closeUser: function(){
+                this.showUser = false
+                }
+            }
+        })
     </script>
 </body>
 </html>

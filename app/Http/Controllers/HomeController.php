@@ -135,4 +135,21 @@ class HomeController extends Controller
         });
         return redirect( route('dislike') )->with('successMessage', '非表示にする食材を更新しました');
     }
+
+    public function clear()
+    {
+        UserMaterial::where('user_id', '=', \Auth::id())->delete();
+    
+        return redirect( route('user') )->with('successMessage', '全ての食材データを削除しました');
+    }
+
+    public function menuSuggest()
+    {
+        #ユーザーの持つ食材をDBから取得
+        $user_materials = UserMaterial::where('user_id', '=', \Auth::id())
+            ->whereNull('deleted_at')
+            ->get();
+            
+        return redirect( route('suggest') );
+    }
 }

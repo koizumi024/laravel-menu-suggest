@@ -6,7 +6,8 @@ $white: #fff;
 $beige: #EBE7D2;
 $green: #4CAF50;
 $aqua: #41C5AD;
-$orange: #F59600;
+$orange: #FF8200;
+$yellow: #F5BB44;
 $l-grey: #ccc;
 $grey: #656565;
 $black: #222222;
@@ -14,8 +15,9 @@ $black: #222222;
 // SCSS Font Size
 $font-s: 0.88em;
 
-// Reset
-.material__submitBtn, .material__submitBtn-hidden{
+// Reset Buttons
+.material__submitBtn, .material__submitBtn-hidden, .suggest__btn,
+.suggest__btn-secondary, .user__btn{
     // reset
     background-color: transparent;
     border: none;
@@ -81,7 +83,7 @@ body::-webkit-scrollbar {
 .message__icon{
     padding: 8px;
     border-radius: 50%;
-    color: #9FF5E6;
+    color: #A0F7E7;
     background-color: $aqua;
 }
 .message__text{
@@ -93,7 +95,7 @@ footer{
     justify-content: space-evenly;
     align-items: center;
     position: fixed;
-    background-color: $black;
+    background-color: $yellow;
     bottom: 0;
     width: 600px;
     height: 120px;
@@ -224,4 +226,37 @@ footer a:hover{
 }
 .material__submitBtn-hidden:hover{
     background-color: #e96d6d;
+}
+
+.suggest__btn{
+    border-radius: 20px;
+    margin: 10px;
+    padding: 10px 20px;
+    color: $white;
+    background-color: $aqua;
+}
+.suggest__btn-secondary{
+    border-radius: 20px;
+    margin: 10px;
+    padding: 10px 20px;
+    color: $white;
+    background-color: $grey;
+}
+// モーダルウィンドウ
+.user__modal-overlay{
+    z-index:1;
+    position:fixed;
+    top:0;
+    width:600px;
+    height:100%;
+    background-color:rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.user__modal-content{
+    z-index:2;
+    width:82%;
+    padding: 1em;
+    background:#fff;
 }

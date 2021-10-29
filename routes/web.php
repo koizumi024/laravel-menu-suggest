@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ScrapingController;
+use Goutte\Client;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +28,6 @@ Route::get('/user', [HomeController::class, 'user'])->name('user');
 Route::get('/suggest', [HomeController::class, 'suggest'])->name('suggest');
 Route::get('/dislike', [HomeController::class, 'dislike'])->name('dislike');
 Route::post('/dstore', [HomeController::class, 'dstore'])->name('dstore');
+Route::get('/search', [ScrapingController::class, 'index']);
+Route::post('/clear', [HomeController::class, 'clear'])->name('clear');
+Route::post('/menu_suggest', [HomeController::class, 'menuSuggest'])->name('menuSuggest');
