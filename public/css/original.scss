@@ -17,7 +17,7 @@ $font-s: 0.88em;
 
 // Reset Buttons
 .material__submitBtn, .material__submitBtn-hidden, .suggest__btn,
-.suggest__btn-secondary, .user__btn{
+.suggest__btn-secondary, .user__btn, .user__clearBtn{
     // reset
     background-color: transparent;
     border: none;
@@ -43,6 +43,9 @@ body::-webkit-scrollbar {
 .bg-app{
     background-color: $beige;
     min-height: calc( 100vh - 120px);
+}
+a:hover{
+    text-decoration: none;
 }
 .message__box{
     margin: 20px;
@@ -259,4 +262,10 @@ footer a:hover{
     width:82%;
     padding: 1em;
     background:#fff;
+}
+.user__btn-danger{
+    color: red;
+}
+.user__clearBtn{
+    color: red;
 }

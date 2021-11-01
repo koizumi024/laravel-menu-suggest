@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Material;
 use App\Models\UserMaterial;
+use App\Models\MenuMaterial;
 use DB;
 
 class HomeController extends Controller
@@ -27,27 +28,27 @@ class HomeController extends Controller
      */
     public function index()
     {
-        #カテゴリ一覧を取得
+        // カテゴリ一覧を取得
         $categories = Category::select('categories.*')->get();
-        #食材一覧を取得
+        // 食材一覧を取得
         $materials = Material::select('materials.*')->get();
 
-        #ユーザーの持つ食材をDBから取得
+        // ユーザーの持つ食材をDBから取得
         $user_materials = UserMaterial::where('user_id', '=', \Auth::id())
             ->whereNull('deleted_at')
             ->get();
 
-        #チェックボックス用の配列
+        // チェックボックス用の配列
         $include_materials = [];
         foreach($user_materials as $u){
             array_push($include_materials, $u['material_id']);
         }
 
-        #非表示食材を取得
+        // 非表示食材を取得
         $hidden_materials = UserMaterial::where('user_id', '=', \Auth::id())
         ->whereNotNull('deleted_at')
         ->get();
-        #viewに渡す用の配列
+        // viewに渡す用の配列
         $exclude_materials = [];
         foreach($hidden_materials as $h){
             array_push($exclude_materials, $h['material_id']);
@@ -65,7 +66,7 @@ class HomeController extends Controller
                 ->whereNull('deleted_at')
                 ->delete();
             
-            #食材を追加（食材が１つもなければ追加する処理はしないので分岐）
+            // 食材を追加（食材が１つもなければ追加する処理はしないので分岐）
             if(isset($posts['materials_id'])){
                 foreach($posts['materials_id'] as $mid){
                     UserMaterial::insert(['material_id' => $mid, 'user_id' => \Auth::id()]);
@@ -85,7 +86,7 @@ class HomeController extends Controller
         foreach($user_materials as $u){
             array_push($include_materials, $u['material_id']);
         }
-        #今持っている食材の数
+        // 今持っている食材の数
         $count = count($include_materials);
 
         return view('suggest', compact('count'));
@@ -98,16 +99,16 @@ class HomeController extends Controller
 
     public function dislike()
     {
-        #カテゴリ一覧を取得
+        // カテゴリ一覧を取得
         $categories = Category::select('categories.*')->get();
-        #食材一覧を全て取得
+        // 食材一覧を全て取得
         $materials_all = Material::select('materials.*')->get();
 
-        #非表示食材を取得
+        // 非表示食材を取得
         $hidden_materials = UserMaterial::where('user_id', '=', \Auth::id())
             ->whereNotNull('deleted_at')
             ->get();
-        #viewに渡す用の配列
+        // viewに渡す用の配列
         $exclude_materials = [];
         foreach($hidden_materials as $h){
             array_push($exclude_materials, $h['material_id']);
@@ -121,15 +122,27 @@ class HomeController extends Controller
         $posts = $request->all();
 
         DB::transaction(function() use($posts) {
-            #非表示食材を全て削除
+            // 非表示食材を全て削除
             UserMaterial::where('user_id', '=', \Auth::id())
                 ->whereNotNull('deleted_at')
                 ->delete();
             
-            #非表示食材の追加（食材が１つもなければ追加する処理はしないので分岐）
+            // 非表示食材の追加（食材が１つもなければ追加する処理はしないので分岐）
             if(isset($posts['materials_id'])){
                 foreach($posts['materials_id'] as $mid){
                     UserMaterial::insert(['material_id' => $mid, 'user_id' => \Auth::id(), 'deleted_at' => date("Y-m-d H:i:s", time())]);
+
+                    $null_exists = UserMaterial::where('user_id', '=', \Auth::id())
+                        ->where('material_id', '=', $mid)
+                        ->whereNull('deleted_at')
+                        ->exists();
+
+                    if( $null_exists ){
+                        UserMaterial::where('user_id', '=', \Auth::id())
+                        ->where('material_id', '=', $mid)
+                        ->whereNull('deleted_at')
+                        ->delete();
+                    }
                 }
             }
         });
@@ -145,11 +158,14 @@ class HomeController extends Controller
 
     public function menuSuggest()
     {
-        #ユーザーの持つ食材をDBから取得
+        // ユーザーの持つ食材をDBから取得
         $user_materials = UserMaterial::where('user_id', '=', \Auth::id())
             ->whereNull('deleted_at')
             ->get();
-            
+        
+        // menu_materialsテーブルの取得
+        $menu_materials = MenuMaterial::select('menu_materials.*')->get();
+
         return redirect( route('suggest') );
     }
 }

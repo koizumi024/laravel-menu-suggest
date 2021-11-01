@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap");
 .material__submitBtn, .material__submitBtn-hidden, .suggest__btn,
-.suggest__btn-secondary, .user__btn {
+.suggest__btn-secondary, .user__btn, .user__clearBtn {
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -34,6 +34,10 @@ body::-webkit-scrollbar {
 .bg-app {
   background-color: #EBE7D2;
   min-height: calc( 100vh - 120px);
+}
+
+a:hover {
+  text-decoration: none;
 }
 
 .message__box {
@@ -339,5 +343,13 @@ footer a:hover {
   width: 82%;
   padding: 1em;
   background: #fff;
+}
+
+.user__btn-danger {
+  color: red;
+}
+
+.user__clearBtn {
+  color: red;
 }
 /*# sourceMappingURL=original.css.map */

@@ -29,14 +29,14 @@
 
     <form class="user__clear" action="{{ route('clear') }}" method="POST">
         @csrf
-        <button type="submit">全ての食材データを削除する</button>
+        <button class="user__clearBtn" type="submit"><i class="fas fa-trash-alt"></i>全ての食材データを削除する</button>
     </form>
     
     
     <a href="{{ route('logout') }}"
     onclick="event.preventDefault();
                   document.getElementById('logout-form').submit();">
-    <div class="user__btn"><i class="fas fa-sign-out-alt"></i>ログアウト</div>
+    <div class="user__btn-danger"><i class="fas fa-sign-out-alt"></i>ログアウト</div>
     </a>
     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
         @csrf
