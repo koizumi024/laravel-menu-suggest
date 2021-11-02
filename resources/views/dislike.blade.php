@@ -2,6 +2,10 @@
 
 @section('content')
 <div id="app">
+    <a href="{{ route('setting') }}">
+        <div>戻る</div>
+    </a>
+
     <h1 class="mb-4 text-center">非表示食材の管理</h1>
     <h3 class="head-text mb-4">カテゴリ選択</h3>
     <div class="categories">
@@ -24,8 +28,7 @@
                         <div class="{{ in_array($m['id'], $exclude_materials) ? 'materials__border-active' : 'materials__border' }}"
                         id="{{ $m['id'] }}">
                             <label for="checkbox{{ $m['id'] }}" onClick="selectMaterial{{ $m['id'] }}()">
-                                <img src="{{ asset('img/materials/tamanegi.png') }}" 
-                                alt="" height=110 width=110>
+                                <img src="/img/materials/{{ $m['image'] }}" alt="食材の画像" class="material__img">
                             </label>
                         </div>
                         <li class="material__name">{{ $m['material'] }}</li>

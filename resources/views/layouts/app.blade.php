@@ -71,13 +71,13 @@
                 </a>
             @endif
 
-            @if (Request::routeIs('user') || (Request::routeIs('dislike')))
+            @if (Request::routeIs('setting') || (Request::routeIs('dislike')))
                 <div class="footer__tab">
                     <i class="fas fa-user-cog footer__icon active"></i>
                     <div class="footer__text active">ユーザー設定</div>
                 </div>
             @else
-                <a href="{{ route('user') }}">
+                <a href="{{ route('setting') }}">
                     <div class="footer__tab">
                         <i class="fas fa-user-cog footer__icon"></i>
                         <div class="footer__text">ユーザー設定</div>

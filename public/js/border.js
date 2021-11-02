@@ -204,3 +204,183 @@ function selectMaterial43(){
             element.className = 'materials__border-active';
     }
 }
+
+function selectMaterial56(){
+    let element = document.getElementById(56);
+        if (checkbox56.checked){
+            element.className = 'materials__border';
+        } else {
+            element.className = 'materials__border-active';
+    }
+}
+
+function selectMaterial57(){
+    let element = document.getElementById(57);
+        if (checkbox57.checked){
+            element.className = 'materials__border';
+        } else {
+            element.className = 'materials__border-active';
+    }
+}
+
+function selectMaterial58(){
+    let element = document.getElementById(58);
+        if (checkbox58.checked){
+            element.className = 'materials__border';
+        } else {
+            element.className = 'materials__border-active';
+    }
+}
+
+function selectMaterial59(){
+    let element = document.getElementById(59);
+        if (checkbox59.checked){
+            element.className = 'materials__border';
+        } else {
+            element.className = 'materials__border-active';
+    }
+}
+
+function selectMaterial60(){
+    let element = document.getElementById(60);
+        if (checkbox60.checked){
+            element.className = 'materials__border';
+        } else {
+            element.className = 'materials__border-active';
+    }
+}
+
+function selectMaterial62(){
+    let element = document.getElementById(62);
+        if (checkbox62.checked){
+            element.className = 'materials__border';
+        } else {
+            element.className = 'materials__border-active';
+    }
+}
+
+function selectMaterial71(){
+    let element = document.getElementById(71);
+        if (checkbox71.checked){
+            element.className = 'materials__border';
+        } else {
+            element.className = 'materials__border-active';
+    }
+}
+
+function selectMaterial75(){
+    let element = document.getElementById(75);
+        if (checkbox75.checked){
+            element.className = 'materials__border';
+        } else {
+            element.className = 'materials__border-active';
+    }
+}
+
+function selectMaterial76(){
+    let element = document.getElementById(76);
+        if (checkbox76.checked){
+            element.className = 'materials__border';
+        } else {
+            element.className = 'materials__border-active';
+    }
+}
+
+function selectMaterial78(){
+    let element = document.getElementById(78);
+        if (checkbox78.checked){
+            element.className = 'materials__border';
+        } else {
+            element.className = 'materials__border-active';
+    }
+}
+
+function selectMaterial79(){
+    let element = document.getElementById(79);
+        if (checkbox79.checked){
+            element.className = 'materials__border';
+        } else {
+            element.className = 'materials__border-active';
+    }
+}
+
+function selectMaterial84(){
+    let element = document.getElementById(84);
+        if (checkbox84.checked){
+            element.className = 'materials__border';
+        } else {
+            element.className = 'materials__border-active';
+    }
+}
+
+function selectMaterial85(){
+    let element = document.getElementById(85);
+        if (checkbox85.checked){
+            element.className = 'materials__border';
+        } else {
+            element.className = 'materials__border-active';
+    }
+}
+
+function selectMaterial90(){
+    let element = document.getElementById(90);
+        if (checkbox90.checked){
+            element.className = 'materials__border';
+        } else {
+            element.className = 'materials__border-active';
+    }
+}
+
+function selectMaterial97(){
+    let element = document.getElementById(97);
+        if (checkbox97.checked){
+            element.className = 'materials__border';
+        } else {
+            element.className = 'materials__border-active';
+    }
+}
+
+function selectMaterial99(){
+    let element = document.getElementById(99);
+        if (checkbox99.checked){
+            element.className = 'materials__border';
+        } else {
+            element.className = 'materials__border-active';
+    }
+}
+
+function selectMaterial107(){
+    let element = document.getElementById(107);
+        if (checkbox107.checked){
+            element.className = 'materials__border';
+        } else {
+            element.className = 'materials__border-active';
+    }
+}
+
+function selectMaterial114(){
+    let element = document.getElementById(114);
+        if (checkbox114.checked){
+            element.className = 'materials__border';
+        } else {
+            element.className = 'materials__border-active';
+    }
+}
+
+function selectMaterial119(){
+    let element = document.getElementById(119);
+        if (checkbox119.checked){
+            element.className = 'materials__border';
+        } else {
+            element.className = 'materials__border-active';
+    }
+}
+
+function selectMaterial120(){
+    let element = document.getElementById(120);
+        if (checkbox120.checked){
+            element.className = 'materials__border';
+        } else {
+            element.className = 'materials__border-active';
+    }
+}

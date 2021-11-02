@@ -22,10 +22,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/material', [HomeController::class, 'index'])->name('material');
+Route::get('/material', [HomeController::class, 'loadMaterial'])->name('material');
 Route::post('/store', [HomeController::class, 'store'])->name('store');
-Route::get('/user', [HomeController::class, 'user'])->name('user');
-Route::get('/suggest', [HomeController::class, 'suggest'])->name('suggest');
+Route::get('/setting', [HomeController::class, 'loadSetting'])->name('setting');
+Route::get('/suggest', [HomeController::class, 'loadSuggest'])->name('suggest');
 Route::get('/dislike', [HomeController::class, 'dislike'])->name('dislike');
 Route::post('/dstore', [HomeController::class, 'dstore'])->name('dstore');
 Route::get('/search', [ScrapingController::class, 'index']);

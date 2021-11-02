@@ -19,14 +19,13 @@
         <div class="materials__wrap" v-bind:class="isActive == {{ $c['id'] }} ? '' : 'd-none' ">
             @foreach ($materials as $m)
                 @if($m['category_id'] == $c['id'])
-                    <input type="checkbox" name="materials_id[]" class="d-none"
-                    id="checkbox{{ $m['id'] }}" value={{ $m['id'] }} 
-                    {{ in_array($m['id'], $include_materials) ? 'checked' : '' }}>
+                    <input type="checkbox" name="materials_id[]" class="d-none" id="checkbox{{ $m['id'] }}" value={{ $m['id'] }} 
+                    {{ in_array($m['id'], $includeMaterialsId) ? 'checked' : '' }}>
                     <div class="materials__content {{ in_array($m['id'], $exclude_materials) ? 'd-none' : '' }}">
-                        <div class="{{ in_array($m['id'], $include_materials) ? 'materials__border-active' : 'materials__border' }}"
+                        <div class="{{ in_array($m['id'], $includeMaterialsId) ? 'materials__border-active' : 'materials__border' }}"
                         id="{{ $m['id'] }}">
                             <label for="checkbox{{ $m['id'] }}" onClick="selectMaterial{{ $m['id'] }}()">
-                                <img src="/img/materials/{{ $m['image'] }}" alt="" class="material__img">
+                                <img src="/img/materials/{{ $m['image'] }}" alt="食材の画像" class="material__img">
                             </label>
                         </div>
                         <li class="material__name">{{ $m['material'] }}</li>

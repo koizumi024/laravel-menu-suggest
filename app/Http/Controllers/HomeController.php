@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Material;
 use App\Models\UserMaterial;
 use App\Models\MenuMaterial;
+use App\Models\Menu;
 use DB;
 
 class HomeController extends Controller
@@ -26,7 +27,8 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    // 1. 食材管理ページ読み込み時に行う処理
+    public function loadMaterial()
     {
         // カテゴリ一覧を取得
         $categories = Category::select('categories.*')->get();
@@ -39,9 +41,9 @@ class HomeController extends Controller
             ->get();
 
         // チェックボックス用の配列
-        $include_materials = [];
+        $includeMaterialsId = [];
         foreach($user_materials as $u){
-            array_push($include_materials, $u['material_id']);
+            array_push($includeMaterialsId, $u['material_id']);
         }
 
         // 非表示食材を取得
@@ -54,9 +56,10 @@ class HomeController extends Controller
             array_push($exclude_materials, $h['material_id']);
         }
 
-        return view('material', compact('categories', 'materials', 'include_materials', 'exclude_materials'));
+        return view('material', compact('categories', 'materials', 'includeMaterialsId', 'exclude_materials'));
     }
 
+    // 1-1. 食材管理ページで食材を更新した際に行う処理
     public function store(Request $request)
     {
         $posts = $request->all();
@@ -76,27 +79,38 @@ class HomeController extends Controller
         return redirect( route('material') )->with('successMessage', '食材を更新しました');
     }
 
-    public function suggest()
+    // 2. メニュー提案ページ読み込み時に行う処理
+    public function loadSuggest()
     {
         $user_materials = UserMaterial::where('user_id', '=', \Auth::id())
             ->whereNull('deleted_at')
             ->get();
 
-        $include_materials = [];
+        $includeMaterialsId = [];
         foreach($user_materials as $u){
-            array_push($include_materials, $u['material_id']);
+            array_push($includeMaterialsId, $u['material_id']);
         }
         // 今持っている食材の数
-        $count = count($include_materials);
+        $count = count($includeMaterialsId);
 
         return view('suggest', compact('count'));
     }
 
-    public function user()
+    // 3. ユーザー設定ページ読み込み時に行う処理
+    public function loadSetting()
     {
-        return view('user');
+        return view('setting');
     }
 
+    // 3-1. 全ての食材データを削除した場合の処理
+    public function clear()
+    {
+        UserMaterial::where('user_id', '=', \Auth::id())->delete();
+    
+        return redirect( route('setting') )->with('successMessage', '全ての食材データを削除しました');
+    }
+
+    // 4. 非表示食材管理ページ読み込み時に行う処理
     public function dislike()
     {
         // カテゴリ一覧を取得
@@ -117,6 +131,7 @@ class HomeController extends Controller
         return view('dislike', compact('categories', 'materials_all', 'exclude_materials'));
     }
 
+    // 4-1. 非表示食材管理ページで食材を更新した際に行う処理
     public function dstore(Request $request)
     {
         $posts = $request->all();
@@ -149,22 +164,50 @@ class HomeController extends Controller
         return redirect( route('dislike') )->with('successMessage', '非表示にする食材を更新しました');
     }
 
-    public function clear()
-    {
-        UserMaterial::where('user_id', '=', \Auth::id())->delete();
-    
-        return redirect( route('user') )->with('successMessage', '全ての食材データを削除しました');
-    }
-
+    // 2-1. メニュー提案リクエストがあった場合の処理
     public function menuSuggest()
     {
         // ユーザーの持つ食材をDBから取得
         $user_materials = UserMaterial::where('user_id', '=', \Auth::id())
             ->whereNull('deleted_at')
             ->get();
+
+        $includeMaterialsId = [];
+        foreach($user_materials as $u){
+            array_push($includeMaterialsId, $u['material_id']);
+        }
         
         // menu_materialsテーブルの取得
         $menu_materials = MenuMaterial::select('menu_materials.*')->get();
+
+        // メニューの数
+        $menusCount = Menu::count();
+        // メニューの数だけループ
+        $matchResult=[];
+        for($i=1; $i <= $menusCount; $i++){
+            $matchCount=0;
+            $matchPercent=0;
+            $menuMaterialsId=[];
+            //メニュー別に食材を取得
+            $menuMaterials = MenuMaterial::where('menu_id', '=', $i)->get();
+            foreach($menuMaterials as $m){
+                array_push($menuMaterialsId, $m['material_id']);
+            }
+
+            // メニューに含まれる食材の数を取得（計算用）
+            $menuMaterialCount = MenuMaterial::where('menu_id', '=', $i)->count();
+
+            // $menuMaterialsIdと$includeMaterialsIdを比較する
+            foreach($includeMaterialsId as $ii){
+                $result = in_array($ii, $menuMaterialsId);
+                if($result){
+                    $matchCount++;
+                }
+            }
+            $matchPercent = intval(round($matchCount/$menuMaterialCount, 2)*100);
+            $matchResult += array($i => $matchPercent);
+        }
+        dd($matchResult);
 
         return redirect( route('suggest') );
     }
