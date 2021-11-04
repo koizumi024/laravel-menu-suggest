@@ -194,19 +194,25 @@ class HomeController extends Controller
                 array_push($menuMaterialsId, $m['material_id']);
             }
 
-            // メニューに含まれる食材の数を取得（計算用）
-            $menuMaterialCount = MenuMaterial::where('menu_id', '=', $i)->count();
-
-            // $menuMaterialsIdと$includeMaterialsIdを比較する
+            // 比較する
             foreach($includeMaterialsId as $ii){
                 $result = in_array($ii, $menuMaterialsId);
+                // 一致していたら
                 if($result){
                     $matchCount++;
                 }
             }
+            // マッチ率の分母を取得（計算用）
+            $menuMaterialCount = MenuMaterial::where('menu_id', '=', $i)->count();
+
+            // 計算
             $matchPercent = intval(round($matchCount/$menuMaterialCount, 2)*100);
-            $matchResult += array($i => $matchPercent);
+            // 配列に入れる
+            $menuName = Menu::where('id', '=', $i)->get();
+            $matchResult += array($menuName[0]['menu'] => $matchPercent);
         }
+        // TODO $matchResultはマッチ率の高い順に並び替える
+        arsort($matchResult);
         dd($matchResult);
 
         return redirect( route('suggest') );
