@@ -211,7 +211,7 @@ class HomeController extends Controller
             $menuName = Menu::where('id', '=', $i)->get();
             $matchResult += array($menuName[0]['menu'] => $matchPercent);
         }
-        // TODO $matchResultはマッチ率の高い順に並び替える
+        // TODO $matchResultはマッチ率の高い順に並び替え
         arsort($matchResult);
         dd($matchResult);
 
