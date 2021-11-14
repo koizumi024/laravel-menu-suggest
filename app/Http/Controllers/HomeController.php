@@ -79,23 +79,6 @@ class HomeController extends Controller
         return redirect( route('material') )->with('successMessage', '食材を更新しました');
     }
 
-    // 2. メニュー提案ページ読み込み時に行う処理
-    public function loadSuggest()
-    {
-        $user_materials = UserMaterial::where('user_id', '=', \Auth::id())
-            ->whereNull('deleted_at')
-            ->get();
-
-        $includeMaterialsId = [];
-        foreach($user_materials as $u){
-            array_push($includeMaterialsId, $u['material_id']);
-        }
-        // 今持っている食材の数
-        $count = count($includeMaterialsId);
-
-        return view('suggest', compact('count'));
-    }
-
     // 3. ユーザー設定ページ読み込み時に行う処理
     public function loadSetting()
     {
@@ -163,11 +146,9 @@ class HomeController extends Controller
         });
         return redirect( route('dislike') )->with('successMessage', '非表示にする食材を更新しました');
     }
-
-    // 2-1. メニュー提案リクエストがあった場合の処理
-    public function menuSuggest()
+        // 2. メニュー提案ページ読み込み時に行う処理
+    public function loadSuggest()
     {
-        // ユーザーの持つ食材をDBから取得
         $user_materials = UserMaterial::where('user_id', '=', \Auth::id())
             ->whereNull('deleted_at')
             ->get();
@@ -176,45 +157,54 @@ class HomeController extends Controller
         foreach($user_materials as $u){
             array_push($includeMaterialsId, $u['material_id']);
         }
-        
-        // menu_materialsテーブルの取得
-        $menu_materials = MenuMaterial::select('menu_materials.*')->get();
+        // 今持っている食材の数
+        $count = count($includeMaterialsId);
 
-        // メニューの数
-        $menusCount = Menu::count();
-        // メニューの数だけループ
-        $matchResult=[];
-        for($i=1; $i <= $menusCount; $i++){
-            $matchCount=0;
-            $matchPercent=0;
-            $menuMaterialsId=[];
-            //メニュー別に食材を取得
-            $menuMaterials = MenuMaterial::where('menu_id', '=', $i)->get();
-            foreach($menuMaterials as $m){
-                array_push($menuMaterialsId, $m['material_id']);
-            }
-
-            // 比較する
-            foreach($includeMaterialsId as $ii){
-                $result = in_array($ii, $menuMaterialsId);
-                // 一致していたら
-                if($result){
-                    $matchCount++;
+   
+            // menu_materialsテーブルの取得
+            $menu_materials = MenuMaterial::select('menu_materials.*')->get();
+    
+            // メニューの数
+            $menusCount = Menu::count();
+            // メニューの数だけループ
+            $matchResult=[];
+            for($i=1; $i <= $menusCount; $i++){
+                $matchCount=0;
+                $matchPercent=0;
+                $menuMaterialsId=[];
+                //メニュー別に食材を取得
+                $menuMaterials = MenuMaterial::where('menu_id', '=', $i)->get();
+                foreach($menuMaterials as $m){
+                    array_push($menuMaterialsId, $m['material_id']);
                 }
+    
+                // 比較する
+                foreach($includeMaterialsId as $ii){
+                    $result = in_array($ii, $menuMaterialsId);
+                    // 一致していたら
+                    if($result){
+                        $matchCount++;
+                    }
+                }
+                // マッチ率の分母を取得（計算用）
+                $menuMaterialCount = MenuMaterial::where('menu_id', '=', $i)->count();
+    
+                // 計算
+                $matchPercent = intval(round($matchCount/$menuMaterialCount, 2)*100);
+                // 配列に入れる
+                $menuName = Menu::where('id', '=', $i)->get();
+                $matchResult += array($menuName[0]['menu'] => $matchPercent);
             }
-            // マッチ率の分母を取得（計算用）
-            $menuMaterialCount = MenuMaterial::where('menu_id', '=', $i)->count();
+            // $matchResultはマッチ率の高い順に並び替える
+            arsort($matchResult);
+            foreach($matchResult as $key => $data){
+                $first_key = $key;
+                $first_data = $data;
+                break;
+            }
+            //dd($matchResult);
 
-            // 計算
-            $matchPercent = intval(round($matchCount/$menuMaterialCount, 2)*100);
-            // 配列に入れる
-            $menuName = Menu::where('id', '=', $i)->get();
-            $matchResult += array($menuName[0]['menu'] => $matchPercent);
-        }
-        // ★TODO $matchResultはマッチ率の高い順に並び替える
-        arsort($matchResult);
-        dd($matchResult);
-
-        return redirect( route('suggest') );
+        return view('suggest', compact('count', 'matchResult', 'first_key', 'first_data'));
     }
 }
+

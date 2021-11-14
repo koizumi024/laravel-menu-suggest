@@ -30,4 +30,4 @@ Route::get('/dislike', [HomeController::class, 'dislike'])->name('dislike');
 Route::post('/dstore', [HomeController::class, 'dstore'])->name('dstore');
 Route::get('/search', [ScrapingController::class, 'index']);
 Route::post('/clear', [HomeController::class, 'clear'])->name('clear');
-Route::post('/menu_suggest', [HomeController::class, 'menuSuggest'])->name('menuSuggest');
+Route::post('/menu-suggest', [HomeController::class, 'menuSuggest'])->name('menuSuggest');

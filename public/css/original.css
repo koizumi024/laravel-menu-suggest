@@ -320,6 +320,46 @@ footer a:hover {
   background-color: #656565;
 }
 
+.result__graph-column {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.result__graph-menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  font-size: 0.8em;
+  text-align: right;
+}
+
+.result__graph-percentBar {
+  color: #fff;
+  font-size: 0.8em;
+  background-color: #d17373;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-right: 10px;
+  width: 100%;
+  height: 35px;
+  overflow: hidden;
+}
+
 .setting__modal-overlay {
   z-index: 1;
   position: fixed;

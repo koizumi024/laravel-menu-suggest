@@ -110,8 +110,21 @@
                 closeUser: function(){
                 this.showUser = false
                 }
+            },
+            computed: {
+                showColor: function(){
+                    return `rgb(255, 0, 255)`;
+                }
             }
         })
+    </script>
+    <script>
+        const percentElement = document.querySelectorAll(".result__graph-percent");
+        let percents = [];
+        for(let i=0; i<percentElement.length; i++){
+            let percent = percentElement[i].innerText;
+            percents.push(percent);
+        }
     </script>
 </body>
 </html>
