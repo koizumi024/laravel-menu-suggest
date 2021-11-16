@@ -1,16 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container" id="app">
-    <h1 class="mb-2 text-center">メニュー提案結果</h1>
+<div id="app">
+    <h1 class="mb-4 text-center">提案結果</h1>
     
-    <div class="text-center mb-2">現在登録されている食材数: <span>{{ $count }}</span> </div>
+    {{-- <div class="text-center mb-2">登録されている食材数: {{ $count }}</div> --}}
     <div class="text-center">
-
-        <p>あなたに１番おすすめのメニューは</p>
-        <p>{{ $first_key }}</p>
-        <p>マッチ度</p>
-        <p>{{ $first_data }}%</p>
+        <div class="result__top mb-4">
+            <p>あなたにオススメのメニューは...</p>
+            <p class="result__top-menu">{{ $first_key }}</p>
+            <h3 class="head-text mb-0">マッチ度</h3>
+            <div class="result__top-percent mb-4"><span>{{ $first_data }}</span>%</div>
+            <a href="https://recipe.rakuten.co.jp/search/{{ $first_key }}" target="_blank">
+                <button class="result__top-btn"><i class="fas fa-search mr-2"></i>楽天レシピで{{ $first_key }}を検索</button></a>
+        </div>
 
         <h3 class="head-text mb-4">詳細結果</h3>
         <div class="result__graph container">

@@ -20,7 +20,7 @@ $width: 500px;
 
 // Reset Buttons
 .material__submitBtn, .material__submitBtn-hidden, .suggest__btn,
-.suggest__btn-secondary, .setting__btn, .setting__clearBtn{
+.suggest__btn-secondary, .setting__btn, .setting__clearBtn, .result__top-btn{
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -34,7 +34,6 @@ body{
     font-family: 'Kiwi Maru', serif;
     color: $black;
     font-size: 1.2em;
-    user-select: none;
     overflow: scroll;
     -ms-overflow-style: none;    /* IE, Edge */
     scrollbar-width: none;      /* Firefox */
@@ -118,14 +117,14 @@ footer a:hover{
     padding: 20px 20px;
 }
 .footer__icon{
-    color: $grey;
+    color: rgba(130,130,130,0.82);
     font-size: 43px;
 }
 .footer__icon.active, .footer__text.active{
     color:$white;
 }
 .footer__text{
-    color: $grey;
+    color: rgba(130,130,130,0.82);
     font-size: $font-s;
 }
 .head-text{
@@ -246,6 +245,27 @@ footer a:hover{
     padding: 10px 20px;
     color: $white;
     background-color: $grey;
+}
+.result__top{
+    
+}
+.result__top-menu{
+    font-size: 1.8em;
+    font-weight: 600;
+}
+.result__top-percent{
+    width: 90px;
+    margin: 0 auto;
+}
+.result__top-percent span{
+    font-size: 1.8em;
+    font-weight: 600;
+}
+.result__top-btn{
+    color: $white;
+    background-color: $aqua;
+    border-radius: 80000px;
+    padding: 10px 20px;
 }
 .result__graph{
 }

@@ -3,9 +3,10 @@
 @section('content')
 
 <div id="app">
-    <h1 class="mb-4 text-center">食材管理</h1>
-    <h3 class="head-text mb-4">カテゴリ選択</h3>
-    <div class="categories">
+    <h1 class="mb-4 text-center">食材の管理</h1>
+    
+    <h3 class="head-text mb-3"><i class="fas fa-search mr-1"></i></i>カテゴリ選択</h3>
+    <div class="categories mb-4">
         @foreach ($categories as $c)
         <input type="radio" class="d-none" id="tab{{ $c['id'] }}"
         name="tab" value="{{ $c['id'] }}" v-model="isActive">
@@ -13,6 +14,7 @@
         @endforeach 
     </div>
 
+    <h3 class="head-text mb-3"><i class="fas fa-hand-pointer mr-2"></i>持っている食材を選択してください</h3>
     <form class="materials" action="{{ route('store') }}" method="POST">
         @csrf
         @foreach ($categories as $c)
@@ -32,7 +34,7 @@
                     </div>
                 @endif
             @endforeach
-            <button type="submit" class="material__submitBtn">追加する</button>
+            <button type="submit" class="material__submitBtn"><i class="fas fa-plus mr-2"></i>追加する</button>
         </div> 
         @endforeach
     </form>

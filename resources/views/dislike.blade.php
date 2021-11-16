@@ -35,7 +35,7 @@
                     </div>
                 @endif
             @endforeach
-            <button type="submit" class="material__submitBtn-hidden">非表示にする</button>
+            <button type="submit" class="material__submitBtn-hidden"><i class="far fa-eye-slash mr-2"></i>非表示にする</button>
         </div> 
         @endforeach
     </form>

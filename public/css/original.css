@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap");
 .material__submitBtn, .material__submitBtn-hidden, .suggest__btn,
-.suggest__btn-secondary, .setting__btn, .setting__clearBtn {
+.suggest__btn-secondary, .setting__btn, .setting__clearBtn, .result__top-btn {
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -15,10 +15,6 @@ body {
   font-family: 'Kiwi Maru', serif;
   color: #222222;
   font-size: 1.2em;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
   overflow: scroll;
   -ms-overflow-style: none;
   /* IE, Edge */
@@ -156,7 +152,7 @@ footer a:hover {
 }
 
 .footer__icon {
-  color: #656565;
+  color: rgba(130, 130, 130, 0.82);
   font-size: 43px;
 }
 
@@ -165,7 +161,7 @@ footer a:hover {
 }
 
 .footer__text {
-  color: #656565;
+  color: rgba(130, 130, 130, 0.82);
   font-size: 0.83em;
 }
 
@@ -318,6 +314,28 @@ footer a:hover {
   padding: 10px 20px;
   color: #fff;
   background-color: #656565;
+}
+
+.result__top-menu {
+  font-size: 1.8em;
+  font-weight: 600;
+}
+
+.result__top-percent {
+  width: 90px;
+  margin: 0 auto;
+}
+
+.result__top-percent span {
+  font-size: 1.8em;
+  font-weight: 600;
+}
+
+.result__top-btn {
+  color: #fff;
+  background-color: #41C5AD;
+  border-radius: 80000px;
+  padding: 10px 20px;
 }
 
 .result__graph-column {

@@ -48,8 +48,8 @@ class HomeController extends Controller
 
         // 非表示食材を取得
         $hidden_materials = UserMaterial::where('user_id', '=', \Auth::id())
-        ->whereNotNull('deleted_at')
-        ->get();
+            ->whereNotNull('deleted_at')
+            ->get();
         // viewに渡す用の配列
         $exclude_materials = [];
         foreach($hidden_materials as $h){
@@ -174,6 +174,7 @@ class HomeController extends Controller
                 $menuMaterialsId=[];
                 //メニュー別に食材を取得
                 $menuMaterials = MenuMaterial::where('menu_id', '=', $i)->get();
+                //もし空じゃなかったら
                 foreach($menuMaterials as $m){
                     array_push($menuMaterialsId, $m['material_id']);
                 }
@@ -195,6 +196,7 @@ class HomeController extends Controller
                 $menuName = Menu::where('id', '=', $i)->get();
                 $matchResult += array($menuName[0]['menu'] => $matchPercent);
             }
+            
             // $matchResultはマッチ率の高い順に並び替える
             arsort($matchResult);
             foreach($matchResult as $key => $data){

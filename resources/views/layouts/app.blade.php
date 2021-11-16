@@ -45,27 +45,27 @@
         <footer>
             @if (Request::routeIs('material'))
                 <div class="footer__tab">
-                    <i class="fas fa-list footer__icon active"></i>
-                    <div class="footer__text active">食材管理</div>
+                    <i class="fas fa-list-alt footer__icon active"></i>
+                    <div class="footer__text active">食材の管理</div>
                 </div>
             @else
                 <a href="{{ route('material') }}">
                     <div class="footer__tab">
-                        <i class="fas fa-list footer__icon"></i>
-                        <div class="footer__text">食材管理</div>
+                        <i class="far fa-list-alt footer__icon"></i>
+                        <div class="footer__text">食材の管理</div>
                     </div>
                 </a>
             @endif
 
             @if (Request::routeIs('suggest'))
                 <div class="footer__tab">
-                    <i class="fas fa-utensils footer__icon active"></i>
+                    <i class="fas fa-lightbulb footer__icon active"></i>
                     <div class="footer__text active">メニュー提案</div>
                 </div>
             @else
                 <a href="{{ route('suggest') }}">
                     <div class="footer__tab">
-                        <i class="fas fa-utensils footer__icon"></i>
+                        <i class="far fa-lightbulb footer__icon"></i>
                         <div class="footer__text">メニュー提案</div>
                     </div>
                 </a>
@@ -73,13 +73,13 @@
 
             @if (Request::routeIs('setting') || (Request::routeIs('dislike')))
                 <div class="footer__tab">
-                    <i class="fas fa-user-cog footer__icon active"></i>
+                    <i class="fas fa-user footer__icon active"></i>
                     <div class="footer__text active">ユーザー設定</div>
                 </div>
             @else
                 <a href="{{ route('setting') }}">
                     <div class="footer__tab">
-                        <i class="fas fa-user-cog footer__icon"></i>
+                        <i class="far fa-user footer__icon"></i>
                         <div class="footer__text">ユーザー設定</div>
                     </div>
                 </a>
@@ -110,21 +110,8 @@
                 closeUser: function(){
                 this.showUser = false
                 }
-            },
-            computed: {
-                showColor: function(){
-                    return `rgb(255, 0, 255)`;
-                }
             }
         })
-    </script>
-    <script>
-        const percentElement = document.querySelectorAll(".result__graph-percent");
-        let percents = [];
-        for(let i=0; i<percentElement.length; i++){
-            let percent = percentElement[i].innerText;
-            percents.push(percent);
-        }
     </script>
 </body>
 </html>
