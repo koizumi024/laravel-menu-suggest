@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('javascript')
+<script src="{{ asset('js/border.js') }}" defer></script>
+@endsection
+
 @section('content')
 
 <div id="app">

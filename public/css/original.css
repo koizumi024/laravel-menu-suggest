@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap");
 .material__submitBtn, .material__submitBtn-hidden, .suggest__btn,
-.suggest__btn-secondary, .setting__btn, .setting__clearBtn, .result__top-btn {
+.suggest__btn-secondary, .setting__btn, .setting__clearBtn, .result__top-btn, .primaryBtn {
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -9,6 +9,21 @@
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
+}
+
+.primaryBtn {
+  color: #fff;
+  background-color: #41C5AD;
+  border-radius: 80000px;
+  padding: 10px 20px;
+}
+
+.secondaryBtn {
+  color: #41C5AD;
+  background-color: #fff;
+  border: 1px solid #41C5AD;
+  border-radius: 80000px;
+  padding: 10px 20px;
 }
 
 body {
@@ -329,13 +344,6 @@ footer a:hover {
 .result__top-percent span {
   font-size: 1.8em;
   font-weight: 600;
-}
-
-.result__top-btn {
-  color: #fff;
-  background-color: #41C5AD;
-  border-radius: 80000px;
-  padding: 10px 20px;
 }
 
 .result__graph-column {
