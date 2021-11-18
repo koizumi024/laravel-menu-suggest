@@ -44,10 +44,12 @@
         {{-- ルートによってアクティブなタブの色を変えるフッター --}}
         <footer>
             @if (Request::routeIs('material'))
-                <div class="footer__tab">
-                    <i class="fas fa-list-alt footer__icon active"></i>
-                    <div class="footer__text active">食材の管理</div>
-                </div>
+                <a href="{{ route('material') }}">
+                    <div class="footer__tab">
+                        <i class="fas fa-list-alt footer__icon active"></i>
+                        <div class="footer__text active">食材の管理</div>
+                    </div>
+                </a>
             @else
                 <a href="{{ route('material') }}">
                     <div class="footer__tab">
@@ -57,11 +59,13 @@
                 </a>
             @endif
 
-            @if (Request::routeIs('suggest'))
-                <div class="footer__tab">
-                    <i class="fas fa-lightbulb footer__icon active"></i>
-                    <div class="footer__text active">メニュー提案</div>
-                </div>
+            @if (Request::routeIs('suggest') || (Request::routeIs('menu.index')))
+                <a href="{{ route('suggest') }}">    
+                    <div class="footer__tab">
+                        <i class="fas fa-lightbulb footer__icon active"></i>
+                        <div class="footer__text active">メニュー提案</div>
+                    </div>
+                </a>
             @else
                 <a href="{{ route('suggest') }}">
                     <div class="footer__tab">
@@ -71,11 +75,13 @@
                 </a>
             @endif
 
-            @if (Request::routeIs('setting') || (Request::routeIs('dislike')))
-                <div class="footer__tab">
-                    <i class="fas fa-user footer__icon active"></i>
-                    <div class="footer__text active">ユーザー設定</div>
-                </div>
+            @if (Request::routeIs('setting') || (Request::routeIs('dislike')) || (Request::routeIs('wishlist')))
+                <a href="{{ route('setting') }}">
+                    <div class="footer__tab">
+                        <i class="fas fa-user footer__icon active"></i>
+                        <div class="footer__text active">ユーザー設定</div>
+                    </div>
+                </a>
             @else
                 <a href="{{ route('setting') }}">
                     <div class="footer__tab">

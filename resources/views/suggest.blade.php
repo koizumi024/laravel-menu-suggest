@@ -11,15 +11,21 @@
             <p class="result__top-menu">{{ $first_key }}</p>
             <h3 class="head-text mb-0">マッチ度</h3>
             <div class="result__top-percent mb-4"><span>{{ $first_data }}</span>%</div>
-            <a href="https://recipe.rakuten.co.jp/search/{{ $first_key }}" target="_blank">
-                <button class="primaryBtn"><i class="fas fa-search mr-2"></i>楽天レシピで{{ $first_key }}を検索</button></a>
+            <a href="/menu/{{ $first_id }}" class="mb-3">
+                <button class="primaryBtn"><i class="fas fa-search mr-2"></i>詳しく見る</button>
+            </a>
         </div>
 
         <h3 class="head-text mb-4">詳細結果</h3>
         <div class="result__graph container">
             @foreach($matchResult as $key => $data)
             <li class="result__graph-column row">
-                <div class="result__graph-menu col-4 p-1">{{ $key }}</div>
+                <div class="result__graph-menu col-4 p-0">
+                    {{-- $loop->iterationはforeachのループした回数を取得するらしい（１から始まる） --}}
+                    <a href="/menu/{{ $menu_idName[$loop->iteration-1] }}">
+                        <i class="result__graph-icon fas fa-search mr-1"></i>{{ $key }}
+                    </a>
+                </div>
                 <div class="col-8">
                     <div class="result__graph-percentBar" style="width:{{ $data }}%;">
                         <span class="result__graph-percent">{{ $data }}</span>%

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserMaterialsTable extends Migration
+class CreateBuysTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateUserMaterialsTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_materials', function (Blueprint $table) {
+        Schema::create('buys', function (Blueprint $table) {
             $table->unsignedBigInteger('id', true);
             $table->unsignedBigInteger('material_id');
             $table->unsignedBigInteger('user_id');
-            $table->softDeletes();
 
             $table->foreign('material_id')->references('id')->on('materials');
             $table->foreign('user_id')->references('id')->on('users');
@@ -31,6 +30,6 @@ class CreateUserMaterialsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_materials');
+        Schema::dropIfExists('buys');
     }
 }

@@ -5,6 +5,10 @@
 
     <h1 class="mb-4 text-center">ユーザ設定</h1>
     
+    <a href="{{ route('wishlist') }}">
+        <p>買い物リスト</p>
+    </a>
+
     <div v-on:click="openFavorite" class="setting__btn"><i class="far fa-heart mr-2"></i>お気に入りレシピ</div>
 
     <div id="overlay" class="setting__modal-overlay" v-show="showFavorite" v-on:click="closeFavorite">

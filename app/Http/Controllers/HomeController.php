@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Buy;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Material;
@@ -209,11 +210,71 @@ class HomeController extends Controller
             foreach($matchResult as $key => $data){
                 $first_key = $key;
                 $first_data = $data;
+                //メニューIDを取得
+                $firstmenu = Menu::select('id')->where('menu', '=', $first_key)->get();
+                $first_id = $firstmenu[0]['id'];
                 break;
             }
+
+            // メニューidを提案順に並べた配列を取得
+            $menu_idName=[];
+            $j=0;
+            foreach($matchResult as $key => $data){
+                $menuId = Menu::select('id')->where('menu', '=', $key)->get();
+                $menu_id = $menuId[0]['id'];
+                $menu_idName += array($j => $menu_id);
+                $j++;
+            }
+            //dd($menu_idName);
             //dd($matchResult);
 
-        return view('suggest', compact('count', 'matchResult', 'first_key', 'first_data'));
+        return view('suggest', compact('count', 'matchResult', 'first_key', 'first_data', 'first_id', 'menu_idName'));
+    }
+
+    public function loadMenuDetail($id){
+        // ユーザーの持つ食材をDBから取得
+        $user_materials = UserMaterial::where('user_id', '=', \Auth::id())
+        ->whereNull('deleted_at')
+        ->get();
+
+        // チェックボックス用の配列
+        $includeMaterialsId = [];
+        foreach($user_materials as $u){
+            array_push($includeMaterialsId, $u['material_id']);
+        }
+
+        //　$idの食材を取得
+        $menuMaterials = MenuMaterial::select('menu_materials.*', 'materials.material AS material')
+            ->where('menu_id', '=', $id)
+            ->leftJoin('materials', 'materials.id', '=', 'menu_materials.material_id')
+            ->get();
+        
+        $selectedMenu = Menu::find($id);
+
+        return view('menu', compact('menuMaterials', 'includeMaterialsId', 'selectedMenu'));
+    }
+
+    public function addBuy(Request $request)
+    {
+        $posts = $request->all();
+    
+        // 買い物リストに追加
+        Buy::insert(['material_id' => $posts['material_id'], 'user_id' => \Auth::id()]);
+        
+        return redirect( route('menu.index', [
+            'id' => $posts['selected_id'],
+        ]) )->with('successMessage', '買い物リストに追加しました');
+    }
+
+    public function wishlist()
+    {
+        // 買い物リストを取得
+        $wishlist = Buy::select('buys.*', 'materials.material AS material')
+            ->where('user_id', '=', \Auth::id())
+            ->leftJoin('materials', 'materials.id', '=', 'buys.material_id')
+            ->get();
+
+        return view('wishlist', compact('wishlist'));
     }
 }
 

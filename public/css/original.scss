@@ -11,6 +11,7 @@ $yellow: #F5BB44;
 $l-grey: #ccc;
 $grey: #656565;
 $black: #222222;
+$red: #e76565;
 
 // SCSS Font Size
 $font-s: 0.83em;
@@ -20,7 +21,7 @@ $width: 500px;
 
 // Reset Buttons
 .material__submitBtn, .material__submitBtn-hidden, .suggest__btn,
-.suggest__btn-secondary, .setting__btn, .setting__clearBtn, .result__top-btn, .primaryBtn{
+.suggest__btn-secondary, .setting__btn, .setting__clearBtn, .result__top-btn, .primaryBtn, .smallBtn{
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -40,6 +41,20 @@ $width: 500px;
     border: 1px solid $aqua;
     border-radius: 80000px;
     padding: 10px 20px;
+}
+.dangerBtn{
+    color: $white;
+    background-color: $red;
+    border-radius: 80000px;
+    padding: 10px 20px;
+    border: 1px solid $white;
+}
+.smallBtn{
+    font-size: 0.8em;
+    color: $white;
+    background-color: $aqua;
+    border-radius: 80000px;
+    padding: 5px 10px;
 }
 
 // General
@@ -286,6 +301,12 @@ footer a:hover{
     justify-content: flex-end;
     font-size: 0.8em;
     text-align: right;
+}
+.result__graph-icon{
+    color: white;
+    background-color: $aqua;
+    padding: 6px;
+    border-radius: 50%;
 }
 .result__graph-percentBar{
     color: $white;

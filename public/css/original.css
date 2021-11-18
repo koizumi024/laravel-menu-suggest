@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap");
 .material__submitBtn, .material__submitBtn-hidden, .suggest__btn,
-.suggest__btn-secondary, .setting__btn, .setting__clearBtn, .result__top-btn, .primaryBtn {
+.suggest__btn-secondary, .setting__btn, .setting__clearBtn, .result__top-btn, .primaryBtn, .smallBtn {
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -24,6 +24,22 @@
   border: 1px solid #41C5AD;
   border-radius: 80000px;
   padding: 10px 20px;
+}
+
+.dangerBtn {
+  color: #fff;
+  background-color: #e76565;
+  border-radius: 80000px;
+  padding: 10px 20px;
+  border: 1px solid #fff;
+}
+
+.smallBtn {
+  font-size: 0.8em;
+  color: #fff;
+  background-color: #41C5AD;
+  border-radius: 80000px;
+  padding: 5px 10px;
 }
 
 body {
@@ -201,7 +217,7 @@ footer a:hover {
 .categories label {
   font-size: 0.95em;
   float: left;
-  border-radius: 40px;
+  border-radius: 80000px;
   margin: 5px 5px;
   padding: 7px 20px;
   border: 1px solid #ccc;
@@ -365,6 +381,13 @@ footer a:hover {
           justify-content: flex-end;
   font-size: 0.8em;
   text-align: right;
+}
+
+.result__graph-icon {
+  color: white;
+  background-color: #41C5AD;
+  padding: 6px;
+  border-radius: 50%;
 }
 
 .result__graph-percentBar {
