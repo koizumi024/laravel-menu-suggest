@@ -28,7 +28,10 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    // 1. 食材管理ページ読み込み時に行う処理
+    
+
+    // ===== material.blade.php関連 =====
+    // 読み込み時に行う処理
     public function loadMaterial()
     {
         // カテゴリ一覧を取得
@@ -51,6 +54,7 @@ class HomeController extends Controller
         $hidden_materials = UserMaterial::where('user_id', '=', \Auth::id())
             ->whereNotNull('deleted_at')
             ->get();
+
         // viewに渡す用の配列
         $exclude_materials = [];
         foreach($hidden_materials as $h){
@@ -60,7 +64,7 @@ class HomeController extends Controller
         return view('material', compact('categories', 'materials', 'includeMaterialsId', 'exclude_materials'));
     }
 
-    // 1-1. 食材管理ページで食材を更新した際に行う処理
+    // 食材を更新した際に行う処理
     public function store(Request $request)
     {
         $posts = $request->all();
@@ -77,24 +81,37 @@ class HomeController extends Controller
                 }
             }
         });
-        return redirect( route('material') )->with('successMessage', '食材を更新しました');
+
+        // リダイレクト後に表示されるメッセージ
+        $message = "食材を更新しました";
+
+        return redirect( route('material') )->with('successMessage', $message);
     }
 
-    // 3. ユーザー設定ページ読み込み時に行う処理
+
+
+    // ===== setting.blade.php関連 =====
+    // 読み込み時に行う処理
     public function loadSetting()
     {
         return view('setting');
     }
 
-    // 3-1. 全ての食材データを削除した場合の処理
+    // 全ての食材データを削除するボタンが押されたら
     public function clear()
     {
         UserMaterial::where('user_id', '=', \Auth::id())->delete();
+
+        // リダイレクト後に表示されるメッセージ
+        $message = "全ての食材データを削除しました";
     
-        return redirect( route('setting') )->with('successMessage', '全ての食材データを削除しました');
+        return redirect( route('setting') )->with('successMessage', $message);
     }
 
-    // 4. 非表示食材管理ページ読み込み時に行う処理
+
+
+    // ===== dislike.blade.php関連 =====
+    // 読み込み時に行う処理
     public function dislike()
     {
         // カテゴリ一覧を取得
@@ -115,7 +132,7 @@ class HomeController extends Controller
         return view('dislike', compact('categories', 'materials_all', 'exclude_materials'));
     }
 
-    // 4-1. 非表示食材管理ページで食材を更新した際に行う処理
+    // 食材を更新した際に行う処理
     public function dstore(Request $request)
     {
         $posts = $request->all();
@@ -145,9 +162,17 @@ class HomeController extends Controller
                 }
             }
         });
-        return redirect( route('dislike') )->with('successMessage', '非表示にする食材を更新しました');
+
+        // リダイレクト後に表示されるメッセージ
+        $message = "非表示にする食材を更新しました";
+
+        return redirect( route('dislike') )->with('successMessage', $message);
     }
-        // 2. メニュー提案ページ読み込み時に行う処理
+
+        
+
+    // ===== suggest.blade.php関連 =====
+    // 読み込み時に行う処理
     public function loadSuggest()
     {
         $user_materials = UserMaterial::where('user_id', '=', \Auth::id())
@@ -231,6 +256,10 @@ class HomeController extends Controller
         return view('suggest', compact('count', 'matchResult', 'first_key', 'first_data', 'first_id', 'menu_idName'));
     }
 
+
+
+    // ===== menu.blade.php関連 =====
+    // 読み込み時に行う処理
     public function loadMenuDetail($id){
         // ユーザーの持つ食材をDBから取得
         $user_materials = UserMaterial::where('user_id', '=', \Auth::id())
@@ -260,13 +289,18 @@ class HomeController extends Controller
     
         // 買い物リストに追加
         Buy::insert(['material_id' => $posts['material_id'], 'user_id' => \Auth::id()]);
+
+        // リダイレクト後に表示されるメッセージ
+        $message = "買い物リストに追加しました";
         
-        return redirect( route('menu.index', [
-            'id' => $posts['selected_id'],
-        ]) )->with('successMessage', '買い物リストに追加しました');
+        return redirect( route('menu.index', ['id' => $posts['selected_id'],]) )->with('successMessage', $message);
     }
 
-    public function wishlist()
+
+
+    // ===== wishlist.blade.php関連 =====
+    // 読み込み時に行う処理
+    public function loadWishlist()
     {
         // 買い物リストを取得
         $wishlist = Buy::select('buys.*', 'materials.material AS material')
@@ -275,6 +309,21 @@ class HomeController extends Controller
             ->get();
 
         return view('wishlist', compact('wishlist'));
+    }
+
+    // 削除ボタンが押されたら
+    public function wishlistDelete(Request $request)
+    {
+        $posts = $request->all();
+
+        Buy::where('user_id', '=', \Auth::id())
+        ->where('material_id', '=', $posts['material_id'])
+        ->delete();
+
+        // リダイレクト後に表示されるメッセージ
+        $message = "削除しました";
+
+        return redirect( route('wishlist') )->with('successMessage', $message);
     }
 }
 
