@@ -362,6 +362,10 @@ footer a:hover {
   font-weight: 600;
 }
 
+.result__graph {
+  margin-bottom: 150px;
+}
+
 .result__graph-column {
   display: -webkit-box;
   display: -ms-flexbox;

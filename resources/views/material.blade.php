@@ -31,7 +31,7 @@
                         <div class="{{ in_array($m['id'], $includeMaterialsId) ? 'materials__border-active' : 'materials__border' }}"
                         id="{{ $m['id'] }}">
                             <label for="checkbox{{ $m['id'] }}" onClick="selectMaterial{{ $m['id'] }}()">
-                                <img src="/img/materials/{{ $m['image'] }}" alt="食材の画像" class="material__img">
+                                <img loading="lazy" src="/img/materials/{{ $m['image'] }}" alt="食材画像" class="material__img">
                             </label>
                         </div>
                         <li class="material__name">{{ $m['material'] }}</li>

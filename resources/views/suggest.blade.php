@@ -16,9 +16,9 @@
             </a>
         </div>
 
-        <h3 class="head-text mb-4">詳細結果</h3>
-        <div class="result__graph container">
-            @foreach($matchResult as $key => $data)
+        <h3 class="head-text mb-4">詳細結果（上位10件）</h3>
+        <div class="result__graph">
+            @foreach($sliceResult as $key => $data)
             <li class="result__graph-column row">
                 <div class="result__graph-menu col-4 p-0">
                     {{-- $loop->iterationはforeachのループした回数を取得するらしい（１から始まる） --}}

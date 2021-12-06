@@ -3,6 +3,6 @@
 @section('content')
 <div id="app">
 
-{{ $title }}
+
 </div>
 @endsection

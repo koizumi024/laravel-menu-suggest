@@ -26,7 +26,7 @@
 </head>
 <body>
     <div id="app" class="bg-app">
-        {{-- 浮かせて表示＋自動でフェードアウトするメッセージ --}}
+        <!-- フラッシュメッセージ -->
         @if (Session::has('successMessage'))
             <div class="message__box">
                 <i class="fas fa-check message__icon"></i>

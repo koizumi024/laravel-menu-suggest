@@ -1,12 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div id="app">
     <h1 class="mb-4 text-center">{{ $selectedMenu['menu'] }}</h1>
     <h3 class="head-text mb-3">必要かも？</h3>
     <div class="need__materials mb-4">
         @foreach( $menuMaterials as $mm)
-        <div class="need__material {{ in_array($mm['material_id'], $includeMaterialsId) ? 'd-none' : 'd-flex' }} justify-content-center">
+        <div class="need__material justify-content-center
+        {{ in_array($mm['material_id'], $includeMaterialsId) == True || in_array($mm['material_id'], $wishlistMaterialsId) == True ? 'd-none' : 'd-flex' }}">
             <div class="need__material-name">
                 {{ $mm['material'] }}
             </div>

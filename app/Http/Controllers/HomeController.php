@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Buy;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Material;
 use App\Models\UserMaterial;
 use App\Models\MenuMaterial;
 use App\Models\Menu;
+use App\Models\Buy;
 use DB;
 
 class HomeController extends Controller
@@ -82,9 +82,8 @@ class HomeController extends Controller
             }
         });
 
-        // リダイレクト後に表示されるメッセージ
+        // リダイレクト
         $message = "食材を更新しました";
-
         return redirect( route('material') )->with('successMessage', $message);
     }
 
@@ -102,9 +101,8 @@ class HomeController extends Controller
     {
         UserMaterial::where('user_id', '=', \Auth::id())->delete();
 
-        // リダイレクト後に表示されるメッセージ
+        // リダイレクト
         $message = "全ての食材データを削除しました";
-    
         return redirect( route('setting') )->with('successMessage', $message);
     }
 
@@ -163,9 +161,8 @@ class HomeController extends Controller
             }
         });
 
-        // リダイレクト後に表示されるメッセージ
+        // リダイレクト
         $message = "非表示にする食材を更新しました";
-
         return redirect( route('dislike') )->with('successMessage', $message);
     }
 
@@ -197,7 +194,13 @@ class HomeController extends Controller
             for($i=1; $i <= $menusCount; $i++){
                 $matchCount=0;
                 $matchPercent=0;
+                $dislikeMaterialsId=[];
                 $menuMaterialsId=[];
+
+                // 非表示にした食材を取得
+                $dislikeMaterials = UserMaterial::where('user_id', '=', \Auth::id())
+                    ->whereNotNull('deleted_at')
+                    ->get();
                 //メニュー別に食材を取得
                 $menuMaterials = MenuMaterial::where('menu_id', '=', $i)->get();
                 // マッチ率の分母を取得（計算用）
@@ -209,16 +212,31 @@ class HomeController extends Controller
                     foreach($menuMaterials as $m){
                         array_push($menuMaterialsId, $m['material_id']);
                     }
+                    foreach($dislikeMaterials as $dm){
+                        array_push($dislikeMaterialsId, $dm['material_id']);
+                    }
     
-                    // 比較する
-                    foreach($includeMaterialsId as $ii){
-                        $result = in_array($ii, $menuMaterialsId);
-                        // 一致していたら
+                    // 持っている食材とメニューに含まれる食材の比較
+                    foreach($includeMaterialsId as $imi){
+                        $result = in_array($imi, $menuMaterialsId, true);
                         if($result){
                             $matchCount++;
                         }
                     }
 
+                    // 非表示にした食材とメニューに含まれる食材の比較（１つでも含まれていたらmatchCountを0にする）
+                    $dislikeCount=0;
+                    foreach($menuMaterialsId as $mmi){
+                        $dislike = in_array($mmi, $dislikeMaterialsId, true);
+                        if($dislike){
+                            $dislikeCount++;
+                        }
+                    }
+
+                    if($dislikeCount != 0){
+                        $matchCount=0;
+                    }
+                    
                     // 計算
                     $matchPercent = intval(round($matchCount/$menuMaterialCount, 2)*100);
                     // 配列に入れる
@@ -231,6 +249,9 @@ class HomeController extends Controller
                 
             // $matchResultはマッチ率の高い順に並び替える
             arsort($matchResult);
+            $sliceResult = array_slice($matchResult, 0, 10);
+            // dd($sliceResult);
+            
             //　一番上のデータの取得
             foreach($matchResult as $key => $data){
                 $first_key = $key;
@@ -253,7 +274,7 @@ class HomeController extends Controller
             //dd($menu_idName);
             //dd($matchResult);
 
-        return view('suggest', compact('count', 'matchResult', 'first_key', 'first_data', 'first_id', 'menu_idName'));
+        return view('suggest', compact('count', 'sliceResult', 'first_key', 'first_data', 'first_id', 'menu_idName'));
     }
 
 
@@ -280,7 +301,13 @@ class HomeController extends Controller
         
         $selectedMenu = Menu::find($id);
 
-        return view('menu', compact('menuMaterials', 'includeMaterialsId', 'selectedMenu'));
+        $wishlistMaterials = Buy::where('user_id', '=', \Auth::id())->get();
+        $wishlistMaterialsId = [];
+        foreach($wishlistMaterials as $wm){
+            array_push($wishlistMaterialsId, $wm['material_id']);
+        }
+
+        return view('menu', compact('menuMaterials', 'includeMaterialsId', 'selectedMenu', 'wishlistMaterialsId'));
     }
 
     public function addBuy(Request $request)
@@ -290,9 +317,8 @@ class HomeController extends Controller
         // 買い物リストに追加
         Buy::insert(['material_id' => $posts['material_id'], 'user_id' => \Auth::id()]);
 
-        // リダイレクト後に表示されるメッセージ
+        // リダイレクト
         $message = "買い物リストに追加しました";
-        
         return redirect( route('menu.index', ['id' => $posts['selected_id'],]) )->with('successMessage', $message);
     }
 
@@ -320,9 +346,8 @@ class HomeController extends Controller
         ->where('material_id', '=', $posts['material_id'])
         ->delete();
 
-        // リダイレクト後に表示されるメッセージ
+        // リダイレクト
         $message = "削除しました";
-
         return redirect( route('wishlist') )->with('successMessage', $message);
     }
 }
