@@ -6,12 +6,6 @@
 
 @section('content')
 <div id="app">
-    <div id="overlay" class="setting__modal-overlay" v-show="showUser" v-on:click="closeUser">
-        <div id="content" class="setting__modal-content">
-            <p>ユーザー情報の変更</p>
-            <p><button v-on:click="closeUser">閉じる</button></p>
-        </div>
-    </div>
     <div id="overlay" class="setting__modal-overlay" v-show="showFavorite" v-on:click="closeFavorite">
         <div id="content" class="setting__modal-content">
             <p>お気に入りレシピ</p>
@@ -27,9 +21,7 @@
             <div class="user__btn"><i class="fas fa-shopping-cart mr-2"></i>買い物リスト</div>
         </a>
 
-        <div v-on:click="openFavorite" class="setting__btn"><i class="far fa-heart mr-2"></i>お気に入りレシピ</div>
-
-        <div v-on:click="openUser" class="setting__btn"><i class="far fa-heart mr-2"></i>ユーザー情報の変更</div>
+        <div v-on:click="openFavorite" class="setting__btn"><i class="far fa-bookmark mr-2"></i>お気に入りレシピ</div>
 
 
         <a href="{{ route('dislike') }}">

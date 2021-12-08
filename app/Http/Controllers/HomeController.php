@@ -10,6 +10,7 @@ use App\Models\MenuMaterial;
 use App\Models\Menu;
 use App\Models\Buy;
 use DB;
+use Goutte\Client;
 
 class HomeController extends Controller
 {
@@ -144,7 +145,11 @@ class HomeController extends Controller
             // 非表示食材の追加（食材が１つもなければ追加する処理はしないので分岐）
             if(isset($posts['materials_id'])){
                 foreach($posts['materials_id'] as $mid){
-                    UserMaterial::insert(['material_id' => $mid, 'user_id' => \Auth::id(), 'deleted_at' => date("Y-m-d H:i:s", time())]);
+                    UserMaterial::insert([
+                        'material_id' => $mid, 
+                        'user_id' => \Auth::id(), 
+                        'deleted_at' => date("Y-m-d H:i:s", time())
+                    ]);
 
                     $null_exists = UserMaterial::where('user_id', '=', \Auth::id())
                         ->where('material_id', '=', $mid)
@@ -249,6 +254,7 @@ class HomeController extends Controller
                 
             // $matchResultはマッチ率の高い順に並び替える
             arsort($matchResult);
+            // 上位10件に絞り込み
             $sliceResult = array_slice($matchResult, 0, 10);
             // dd($sliceResult);
             
@@ -271,10 +277,18 @@ class HomeController extends Controller
                 $menu_idName += array($j => $menu_id);
                 $j++;
             }
-            //dd($menu_idName);
-            //dd($matchResult);
 
-        return view('suggest', compact('count', 'sliceResult', 'first_key', 'first_data', 'first_id', 'menu_idName'));
+            // 画像の取得
+            $client = new Client();
+            $url = "https://recipe.rakuten.co.jp/search/".$first_key;
+            $crawler = $client->request('GET', $url);
+
+            $imgNode = $crawler->filter('.recipe_ranking__img img')->eq(0);
+            $panelImage = $imgNode->each(function($element){
+                return $element->attr('src');
+            });
+            
+        return view('suggest', compact('count', 'sliceResult', 'first_key', 'first_data', 'first_id', 'menu_idName', 'panelImage'));
     }
 
 
@@ -307,7 +321,55 @@ class HomeController extends Controller
             array_push($wishlistMaterialsId, $wm['material_id']);
         }
 
-        return view('menu', compact('menuMaterials', 'includeMaterialsId', 'selectedMenu', 'wishlistMaterialsId'));
+        $client = new Client();
+        $keyword = $selectedMenu['menu'];
+        $url = "https://recipe.rakuten.co.jp/search/".$keyword;
+        $crawler = $client->request('GET', $url);
+
+        // レシピ名を取得
+        $titleNode = $crawler->filter('.recipe_ranking__recipe_title');
+        $recipeTitles = $titleNode->each(function($element){
+            return $element->text();
+        });
+
+        // レシピIDを取得
+        $idNode = $crawler->filter('.recipe_ranking__item a');
+        $recipeIds = $idNode->each(function($element){
+            $onlyId = substr($element->attr('href'), 8);
+            $onlyId2 = str_replace('/', '', $onlyId);
+            return $onlyId2;
+        });
+
+        // レシピ画像を取得
+        $imgNode = $crawler->filter('.recipe_ranking__img img');
+        $recipeImgs = $imgNode->each(function($element){
+            return $element->attr('src');
+        });
+
+        // 食材を取得
+        $materialNode = $crawler->filter('.recipe_ranking__material');
+        $recipeMaterials = $materialNode->each(function($element){
+            return $element->text();
+        });
+
+        // dd($recipeMaterials);
+
+        // 配列化
+        $recipes=[];
+        $length = count($recipeTitles);
+        for($i=0; $i<$length; $i++){
+            $recipe=[
+                "title" => $recipeTitles[$i], 
+                "rid" => $recipeIds[$i],
+                "materials" => $recipeMaterials[$i],  
+                "img" => $recipeImgs[$i]
+            ];
+            array_push($recipes, $recipe);
+        }
+        
+        // dd($recipes);
+
+        return view('menu', compact('menuMaterials', 'includeMaterialsId', 'selectedMenu', 'wishlistMaterialsId', 'recipes'));
     }
 
     public function addBuy(Request $request)

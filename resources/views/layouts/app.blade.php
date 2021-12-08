@@ -37,7 +37,7 @@
         @endif
 
         {{-- ルートによってビューを差し込む部分 --}}
-        <main class="py-4">
+        <main class="pb-4">
             @yield('content')
         </main>
         
@@ -46,15 +46,15 @@
             @if (Request::routeIs('material'))
                 <a href="{{ route('material') }}">
                     <div class="footer__tab">
-                        <i class="fas fa-list-alt footer__icon active"></i>
-                        <div class="footer__text active">食材の管理</div>
+                        <i class="fas fa-apple-alt footer__icon active"></i>
+                        <div class="footer__text active">マイ食材</div>
                     </div>
                 </a>
             @else
                 <a href="{{ route('material') }}">
                     <div class="footer__tab">
-                        <i class="far fa-list-alt footer__icon"></i>
-                        <div class="footer__text">食材の管理</div>
+                        <i class="fas fa-apple-alt footer__icon"></i>
+                        <div class="footer__text">マイ食材</div>
                     </div>
                 </a>
             @endif
@@ -63,14 +63,14 @@
                 <a href="{{ route('suggest') }}">    
                     <div class="footer__tab">
                         <i class="fas fa-lightbulb footer__icon active"></i>
-                        <div class="footer__text active">メニュー提案</div>
+                        <div class="footer__text active">提案</div>
                     </div>
                 </a>
             @else
                 <a href="{{ route('suggest') }}">
                     <div class="footer__tab">
                         <i class="far fa-lightbulb footer__icon"></i>
-                        <div class="footer__text">メニュー提案</div>
+                        <div class="footer__text">提案</div>
                     </div>
                 </a>
             @endif

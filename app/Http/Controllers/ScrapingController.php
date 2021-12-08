@@ -7,7 +7,7 @@ use Goutte\Client;
 
 class ScrapingController extends Controller
 {
-    public function index()
+    public function scrapingRecipe()
     {
         $client = new Client();
         $keyword = "肉じゃが";
@@ -24,7 +24,8 @@ class ScrapingController extends Controller
         $idNode = $crawler->filter('.recipe_ranking__item a');
         $recipeIds = $idNode->each(function($element){
             $onlyId = substr($element->attr('href'), 8);
-            return $onlyId;
+            $onlyId2 = str_replace('/', '', $onlyId);
+            return $onlyId2;
         });
 
         // レシピ画像を取得
@@ -33,11 +34,17 @@ class ScrapingController extends Controller
             return $element->attr('src');
         });
 
-        dd($recipeImgs);
+
+        // 配列化
+        $recipes=[];
+        $length = count($recipeTitles);
+        for($i=0; $i<$length; $i++){
+            $recipe=["title" => $recipeTitles[$i], "rid" => $recipeIds[$i], "img" => $recipeImgs[$i]];
+            array_push($recipes, $recipe);
+        }
         
+        dd($recipes);
         
-        
-        // echo $recipeTitles;
-        return view('search');
+        return view('search', compact('recipes'));
     }
 }

@@ -7,7 +7,7 @@
 @section('content')
 
 <div id="app">
-    <h1 class="mb-4 text-center">食材の管理</h1>
+    <h1 class="mb-4 text-center">持っている食材</h1>
     
     <h3 class="head-text mb-3"><i class="fas fa-search mr-1"></i></i>カテゴリ選択</h3>
     <div class="categories mb-4">

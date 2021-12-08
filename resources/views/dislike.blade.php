@@ -10,7 +10,7 @@
         <div>戻る</div>
     </a>
 
-    <h1 class="mb-4 text-center">非表示食材の管理</h1>
+    <h1 class="mb-4 text-center">苦手な食材</h1>
     <h3 class="head-text mb-4">カテゴリ選択</h3>
     <div class="categories">
         @foreach ($categories as $c)

@@ -23,10 +23,34 @@
         @endforeach
     </div>
     
-    <div class="rakuten-recipe text-center">
-        <a href="https://recipe.rakuten.co.jp/search/{{ $selectedMenu['menu'] }}" target="_blank">
-        <button class="primaryBtn"><i class="fas fa-external-link-alt mr-2"></i>楽天レシピで検索</button>
-    </a>
+    
+    <div class="rakuten-recipe">
+        {{-- <a href="https://recipe.rakuten.co.jp/search/{{ $selectedMenu['menu'] }}" target="_blank">
+            <button class="primaryBtn"><i class="fas fa-external-link-alt mr-2"></i>楽天レシピで検索</button>
+        </a> --}}
+
+        <h2 class="mb-4 text-center">人気のレシピ</h1>
+
+        @foreach( $recipes as $r)
+        <li class="recipes__recipe">
+            <a href="https://recipe.rakuten.co.jp/recipe/{{ $recipes[$loop->iteration-1]['rid'] }}" target="_blank">
+                <div class="d-flex">
+                    <img loading="lazy" class="recipes__recipe-img" src="{{ $recipes[$loop->iteration-1]['img'] }}" alt="レシピ画像">
+                    <div class="j" style="background-image: linear-gradient(90deg, rgba(232,228,210, 1), 60%, rgba(232,232,218, 0.66)), url('{{ $recipes[$loop->iteration-1]['img'] }}')">
+                        <div class="recipes__recipe-title mx-3 my-2">{{ $recipes[$loop->iteration-1]['title'] }}</div>
+                        <div class="recipes__recipe-menu d-flex">
+                            <input type="hidden" name="rid" value="{{ $recipes[$loop->iteration-1]['rid'] }}">
+                            <div class="kirai">嫌いな食材あり</div>
+                            <button class="recipes__fav-btn mr-2"><i class="far fa-star"></i></button>
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+            </a>
+        </li>
+
+        @endforeach
     </div>
     
 </div>
