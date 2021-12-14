@@ -6,13 +6,9 @@
 
 @section('content')
 <div id="app">
-    <a href="{{ route('setting') }}">
-        <div>戻る</div>
-    </a>
-
-    <h1 class="mb-4 text-center">苦手な食材</h1>
-    <h3 class="head-text mb-4">カテゴリ選択</h3>
-    <div class="categories">
+    <h1 class="mb-4 text-center pt-4">嫌いな食材の設定</h1>
+    <h3 class="head-text mb-4"><i class="fas fa-search mr-1"></i>カテゴリ選択</h3>
+    <div class="categories mb-4">
         @foreach ($categories as $c)
         <input type="radio" class="d-none" id="tab{{ $c['id'] }}"
         name="tab" value="{{ $c['id'] }}" v-model="isActive">
@@ -20,6 +16,7 @@
         @endforeach 
     </div>
 
+    <h3 class="head-text mb-3"><i class="fas fa-hand-pointer mr-2"></i>苦手な食材を選択してください</h3>
     <form class="materials" action="{{ route('dstore') }}" method="POST">
         @csrf
         @foreach ($categories as $c)

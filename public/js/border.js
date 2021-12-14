@@ -1,3 +1,13 @@
+function selectMaterial(id){
+    let element = document.getElementById(id);
+    let cb = "checkbox"+id
+        if (cb.checked){
+            element.className = 'materials__border';
+        } else {
+            element.className = 'materials__border-active';
+    }
+}
+
 function selectMaterial1(){
     let element = document.getElementById(1);
         if (checkbox1.checked){

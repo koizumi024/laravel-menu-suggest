@@ -28,13 +28,20 @@
     <div id="app" class="bg-app">
         <!-- フラッシュメッセージ -->
         @if (Session::has('successMessage'))
-            <div class="message__box">
-                <i class="fas fa-check message__icon"></i>
-                <div class="message__text">
-                    {{ session('successMessage') }}
-                </div>
+        <div class="message__box">
+            <i class="fas fa-check message__icon"></i>
+            <div class="message__text">
+                {{ session('successMessage') }}
             </div>
+        </div>
         @endif
+
+        <div class="logout"><a href="{{ route('logout') }}" onclick="event.preventDefault();
+            document.getElementById('logout-form').submit();"></a></div>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+            @csrf
+        </form>
+
 
         {{-- ルートによってビューを差し込む部分 --}}
         <main class="pb-4">
@@ -43,80 +50,65 @@
         
         {{-- ルートによってアクティブなタブの色を変えるフッター --}}
         <footer>
-            @if (Request::routeIs('material'))
-                <a href="{{ route('material') }}">
-                    <div class="footer__tab">
-                        <i class="fas fa-apple-alt footer__icon active"></i>
-                        <div class="footer__text active">マイ食材</div>
-                    </div>
-                </a>
-            @else
-                <a href="{{ route('material') }}">
-                    <div class="footer__tab">
-                        <i class="fas fa-apple-alt footer__icon"></i>
-                        <div class="footer__text">マイ食材</div>
-                    </div>
-                </a>
-            @endif
+            <a href="{{ route('my-materials') }}">
+                <div class="footer__tab">
+                @if (Request::routeIs('update-materials') || Request::routeIs('dislike-materials')|| Request::routeIs('my-materials'))
+                    <i class="fas fa-apple-alt footer__icon active"></i>
+                    <div class="footer__text active">マイ食材</div>
+                @else
+                    <i class="fas fa-apple-alt footer__icon"></i>
+                    <div class="footer__text">マイ食材</div>
+                @endif
+                </div>
+            </a>
 
-            @if (Request::routeIs('suggest') || (Request::routeIs('menu.index')))
-                <a href="{{ route('suggest') }}">    
-                    <div class="footer__tab">
-                        <i class="fas fa-lightbulb footer__icon active"></i>
-                        <div class="footer__text active">提案</div>
-                    </div>
-                </a>
-            @else
-                <a href="{{ route('suggest') }}">
-                    <div class="footer__tab">
-                        <i class="far fa-lightbulb footer__icon"></i>
-                        <div class="footer__text">提案</div>
-                    </div>
-                </a>
-            @endif
+            <a href="{{ route('suggest') }}">    
+                <div class="footer__tab">
+                @if (Request::routeIs('suggest') || (Request::routeIs('menu.index')) || (Request::routeIs('end')))
+                    <i class="fas fa-lightbulb footer__icon active"></i>
+                    <div class="footer__text active">提案</div>
+                @else
+                    <i class="fas fa-lightbulb footer__icon"></i>
+                    <div class="footer__text">提案</div>
+                @endif
+                </div>
+            </a>
 
-            @if (Request::routeIs('setting') || (Request::routeIs('dislike')) || (Request::routeIs('wishlist')))
-                <a href="{{ route('setting') }}">
-                    <div class="footer__tab">
-                        <i class="fas fa-user footer__icon active"></i>
-                        <div class="footer__text active">ユーザー設定</div>
-                    </div>
-                </a>
-            @else
-                <a href="{{ route('setting') }}">
-                    <div class="footer__tab">
-                        <i class="far fa-user footer__icon"></i>
-                        <div class="footer__text">ユーザー設定</div>
-                    </div>
-                </a>
-            @endif
+            <a href="{{ route('wishlist') }}">
+                <div class="footer__tab">
+                @if (Request::routeIs('wishlist'))
+                    <i class="fas fa-shopping-cart footer__icon active"></i>
+                    <div class="footer__text active">買い物リスト</div>
+                @else
+                    <i class="fas fa-shopping-cart footer__icon"></i>
+                    <div class="footer__text">買い物リスト</div>
+                @endif
+                </div>
+            </a>
+            
+            <a href="{{ route('favorite') }}">
+                <div class="footer__tab">
+                @if (Request::routeIs('favorite'))
+                    <i class="fas fa-bookmark footer__icon active"></i>
+                    <div class="footer__text active">お気に入り</div>
+                @else
+                    <i class="fas fa-bookmark footer__icon"></i>
+                    <div class="footer__text">お気に入り</div>
+                @endif
+                </div>
+            </a>
+           
         </footer>
         
     </div>
-    {{--  Vue.jsを利用したタブメニュー （参考: https://qiita.com/mimoe/items/86d5312b3741320b717b) --}}
+    {{--  タブメニュー （参考: https://qiita.com/mimoe/items/86d5312b3741320b717b) --}}
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.min.js"></script>
     <script>
         new Vue({
             el: '#app',
             data: {
                 isActive: '1',
-                showFavorite: false,
-                showUser: false,
             },
-            methods:{
-                openFavorite: function(){
-                this.showFavorite = true
-                },
-                closeFavorite: function(){
-                this.showFavorite = false
-                },
-                openUser: function(){
-                this.showUser = true
-                },
-                closeUser: function(){
-                this.showUser = false
-                }
-            }
         })
     </script>
 </body>

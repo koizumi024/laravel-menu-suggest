@@ -6,7 +6,7 @@
 | -------------------------------------------- | -------------- | 
 | app/Http/Controllers | DB操作など | 
 | public/css |スタイルシート| 
-| public/css|JavaScriptなど| 
+| public/js |JavaScriptなど| 
 | public/img | 画像 | 
-| resources/views | Blade(HTML)　| 
+| resources/views | Blade(HTML) | 
 | routes/web.php | URL管理 | 

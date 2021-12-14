@@ -25,7 +25,7 @@
 </head>
 <body>
     <div id="app" class="bg-auth">
-        <main class="py-4">
+        <main class="py-5">
             @yield('content')
         </main>
     </div>

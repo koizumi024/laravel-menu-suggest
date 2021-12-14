@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3870e653c78cac40613261c35a7dd40f",
+    "content-hash": "4d4858d55db423ca1433595834269c9e",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -61,6 +61,49 @@
                 "source": "https://github.com/asm89/stack-cors/tree/v2.0.3"
             },
             "time": "2021-03-11T06:42:03+00:00"
+        },
+        {
+            "name": "ateliee/mecab",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ateliee/mecab.git",
+                "reference": "f9983f6a2379e465efed8c6a9ff7f51da9e91f78"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ateliee/mecab/zipball/f9983f6a2379e465efed8c6a9ff7f51da9e91f78",
+                "reference": "f9983f6a2379e465efed8c6a9ff7f51da9e91f78",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.0.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "meCab\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "ateliee",
+                    "email": "info@ateliee.com",
+                    "homepage": "http://ateliee.com"
+                }
+            ],
+            "description": "mecab reading for php",
+            "homepage": "https://github.com/ateliee/mecab",
+            "support": {
+                "issues": "https://github.com/ateliee/mecab/issues",
+                "source": "https://github.com/ateliee/mecab/tree/master"
+            },
+            "time": "2017-01-24T23:35:29+00:00"
         },
         {
             "name": "brick/math",
@@ -8315,7 +8358,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "ateliee/mecab": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

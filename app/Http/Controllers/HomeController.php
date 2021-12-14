@@ -3,14 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
+use DB;
 use App\Models\Category;
 use App\Models\Material;
 use App\Models\UserMaterial;
 use App\Models\MenuMaterial;
 use App\Models\Menu;
 use App\Models\Buy;
-use DB;
+use App\Models\Favorite;
+
 use Goutte\Client;
+use meCab\meCab;
+
 
 class HomeController extends Controller
 {
@@ -33,7 +38,25 @@ class HomeController extends Controller
 
     // ===== material.blade.php関連 =====
     // 読み込み時に行う処理
-    public function loadMaterial()
+    public function loadMyMaterials()
+    {
+        $user_materials = UserMaterial::select('user_materials.*', 'materials.material AS material', 'categories.category AS category', 'materials.image AS image')
+            ->where('user_id', '=', \Auth::id())
+            ->whereNull('deleted_at')
+            ->leftJoin('materials', 'materials.id', '=', 'user_materials.material_id')
+            ->leftJoin('categories', 'categories.id', '=', 'materials.category_id')
+            ->get();
+
+        $includeMaterialsId = [];
+        foreach($user_materials as $u){
+            array_push($includeMaterialsId, $u['material_id']);
+        }
+
+        return view('my-materials', compact('user_materials'));
+    }
+
+
+    public function loadUpdateMaterials()
     {
         // カテゴリ一覧を取得
         $categories = Category::select('categories.*')->get();
@@ -62,7 +85,7 @@ class HomeController extends Controller
             array_push($exclude_materials, $h['material_id']);
         }
 
-        return view('material', compact('categories', 'materials', 'includeMaterialsId', 'exclude_materials'));
+        return view('update-materials', compact('categories', 'materials', 'includeMaterialsId', 'exclude_materials'));
     }
 
     // 食材を更新した際に行う処理
@@ -85,33 +108,14 @@ class HomeController extends Controller
 
         // リダイレクト
         $message = "食材を更新しました";
-        return redirect( route('material') )->with('successMessage', $message);
-    }
-
-
-
-    // ===== setting.blade.php関連 =====
-    // 読み込み時に行う処理
-    public function loadSetting()
-    {
-        return view('setting');
-    }
-
-    // 全ての食材データを削除するボタンが押されたら
-    public function clear()
-    {
-        UserMaterial::where('user_id', '=', \Auth::id())->delete();
-
-        // リダイレクト
-        $message = "全ての食材データを削除しました";
-        return redirect( route('setting') )->with('successMessage', $message);
+        return redirect( route('update-materials') )->with('successMessage', $message);
     }
 
 
 
     // ===== dislike.blade.php関連 =====
     // 読み込み時に行う処理
-    public function dislike()
+    public function loadDislikeMaterials()
     {
         // カテゴリ一覧を取得
         $categories = Category::select('categories.*')->get();
@@ -122,13 +126,14 @@ class HomeController extends Controller
         $hidden_materials = UserMaterial::where('user_id', '=', \Auth::id())
             ->whereNotNull('deleted_at')
             ->get();
+
         // viewに渡す用の配列
         $exclude_materials = [];
         foreach($hidden_materials as $h){
             array_push($exclude_materials, $h['material_id']);
         }
 
-        return view('dislike', compact('categories', 'materials_all', 'exclude_materials'));
+        return view('dislike-materials', compact('categories', 'materials_all', 'exclude_materials'));
     }
 
     // 食材を更新した際に行う処理
@@ -168,7 +173,7 @@ class HomeController extends Controller
 
         // リダイレクト
         $message = "非表示にする食材を更新しました";
-        return redirect( route('dislike') )->with('successMessage', $message);
+        return redirect( route('dislike-materials') )->with('successMessage', $message);
     }
 
         
@@ -185,10 +190,7 @@ class HomeController extends Controller
         foreach($user_materials as $u){
             array_push($includeMaterialsId, $u['material_id']);
         }
-        // 今持っている食材の数
-        $count = count($includeMaterialsId);
 
-   
             // menu_materialsテーブルの取得
             $menu_materials = MenuMaterial::select('menu_materials.*')->get();
     
@@ -288,7 +290,7 @@ class HomeController extends Controller
                 return $element->attr('src');
             });
             
-        return view('suggest', compact('count', 'sliceResult', 'first_key', 'first_data', 'first_id', 'menu_idName', 'panelImage'));
+        return view('suggest', compact('sliceResult', 'first_key', 'first_data', 'first_id', 'menu_idName', 'panelImage'));
     }
 
 
@@ -366,18 +368,54 @@ class HomeController extends Controller
             ];
             array_push($recipes, $recipe);
         }
-        
         // dd($recipes);
 
-        return view('menu', compact('menuMaterials', 'includeMaterialsId', 'selectedMenu', 'wishlistMaterialsId', 'recipes'));
+        // 嫌いな食材が含まれていないかチェック
+        // 非表示にした食材を取得
+        $dislikeMaterials = UserMaterial::select('user_materials.*', 'materials.material AS material')
+            ->where('user_id', '=', \Auth::id())
+            ->whereNotNull('deleted_at')
+            ->leftJoin('materials', 'materials.id', '=', 'user_materials.material_id')
+            ->get();
+        
+        $dislikeMaterialList = [];
+        foreach($dislikeMaterials as $d){
+            array_push($dislikeMaterialList, $d['material']);
+        }
+        // dd($dislikeMaterialList);
+
+        $dislikeMenuList=[];
+        for($i=0; $i<$length; $i++){
+            $dislikeCount=0;
+            foreach($dislikeMaterialList as $d){
+                if(strpos($recipes[$i]['materials'], $d) !== false){
+                    array_push($dislikeMenuList, $recipes[$i]['rid']);
+                }
+            }
+        }
+        // dd($dislikeMenuList);
+        
+        // お気に入りレシピの取得
+        $user_recipes = Favorite::where('user_id', '=', \Auth::id())->get();
+        
+        $favoritesId = [];
+        foreach($user_recipes as $ur){
+            array_push($favoritesId, $ur['recipe_id']);
+        }
+        // dd($favoritesId);
+    
+        return view('menu', compact('menuMaterials', 'includeMaterialsId', 'selectedMenu', 'wishlistMaterialsId', 'recipes', 'favoritesId', 'dislikeMenuList'));
     }
 
-    public function addBuy(Request $request)
+    public function addWishlist(Request $request)
     {
         $posts = $request->all();
     
         // 買い物リストに追加
-        Buy::insert(['material_id' => $posts['material_id'], 'user_id' => \Auth::id()]);
+        Buy::insert([
+            'material_id' => $posts['material_id'], 
+            'user_id' => \Auth::id()
+        ]);
 
         // リダイレクト
         $message = "買い物リストに追加しました";
@@ -391,26 +429,164 @@ class HomeController extends Controller
     public function loadWishlist()
     {
         // 買い物リストを取得
-        $wishlist = Buy::select('buys.*', 'materials.material AS material')
+        $wishlist = Buy::select('buys.*', 'materials.material AS material', 'categories.category AS category', 'materials.image AS image')
             ->where('user_id', '=', \Auth::id())
             ->leftJoin('materials', 'materials.id', '=', 'buys.material_id')
+            ->leftJoin('categories', 'categories.id', '=', 'materials.category_id')
             ->get();
 
-        return view('wishlist', compact('wishlist'));
+        $wishlistCount = Buy::where('user_id', '=', \Auth::id())->count();
+        
+            // dd($wishlist);
+
+        return view('wishlist', compact('wishlist', 'wishlistCount'));
     }
 
     // 削除ボタンが押されたら
-    public function wishlistDelete(Request $request)
+    public function deleteWishlist(Request $request)
     {
         $posts = $request->all();
 
         Buy::where('user_id', '=', \Auth::id())
-        ->where('material_id', '=', $posts['material_id'])
-        ->delete();
+            ->where('material_id', '=', $posts['material_id'])
+            ->delete();
 
         // リダイレクト
         $message = "削除しました";
         return redirect( route('wishlist') )->with('successMessage', $message);
     }
+
+    public function favRecipe(Request $request)
+    {
+        $posts = $request->all();
+        // dd($posts);
+
+        $fav_exists = Favorite::where('recipe_id', '=', $posts['rid'])
+                        ->where('user_id', '=', \Auth::id())
+                        ->exists();
+
+        if( !$fav_exists ){
+            Favorite::insert([
+            'recipe_id' => $posts['rid'], 
+            'recipe_title' => $posts['title'],
+            'recipe_image' => $posts['img'],
+            'user_id' => \Auth::id()
+        ]);
+        }else{
+            Favorite::where('recipe_id', '=', $posts['rid'])
+                ->where('user_id', '=', \Auth::id())
+                ->delete();
+        }
+        
+        // リダイレクト
+        return redirect( route('menu.index', ['id' => $posts['selected_id']]) );
+    }
+
+    public function loadFavorite()
+    {
+        $user_favorite = Favorite::where('user_id', '=', \Auth::id())->get();
+
+        $favoriteCount = Favorite::where('user_id', '=', \Auth::id())->count();
+        
+        return view('favorite', compact('user_favorite', 'favoriteCount'));
+    }
+
+    public function favRecipe2(Request $request)
+    {
+        $posts = $request->all();
+        // dd($posts);
+
+        $fav_exists = Favorite::where('recipe_id', '=', $posts['rid'])
+                        ->where('user_id', '=', \Auth::id())
+                        ->exists();
+
+        if( !$fav_exists ){
+            Favorite::insert([
+            'recipe_id' => $posts['rid'], 
+            'recipe_title' => $posts['title'],
+            'recipe_image' => $posts['img'],
+            'user_id' => \Auth::id()
+        ]);
+        }else{
+            Favorite::where('recipe_id', '=', $posts['rid'])
+                ->where('user_id', '=', \Auth::id())
+                ->delete();
+        }
+        
+        // リダイレクト
+        return redirect( route('favorite') );
+    }
+
+    public function loadEnd()
+    {
+        $user_materials = UserMaterial::select('user_materials.*', 'materials.material AS material')
+            ->where('user_id', '=', \Auth::id())
+            ->whereNull('deleted_at')
+            ->leftJoin('materials', 'materials.id', '=', 'user_materials.material_id')
+            ->get();
+
+        // dd($user_materials);
+        return view('end', compact('user_materials'));
+    }
+
+    public function deleteMaterial(Request $request)
+    {
+        $posts = $request->all();
+        // dd($posts);
+
+        if(isset($posts['material_id'])){
+            foreach($posts['material_id'] as $mid){
+                UserMaterial::where('material_id', '=', $mid)
+                ->where('user_id', '=', \Auth::id())
+                ->delete();
+            }
+        }
+        
+        // リダイレクト
+        return redirect( route('suggest') );
+    }
+
+    public function deleteMaterial2(Request $request)
+    {
+        $posts = $request->all();
+ 
+        UserMaterial::where('material_id', '=', $posts['material_id'])
+            ->where('user_id', '=', \Auth::id())
+            ->delete();
+        
+        // リダイレクト
+        return redirect( route('my-materials') );
+    }
+
+    public function deleteWishlist2(Request $request)
+    {
+        $posts = $request->all();
+ 
+        Buy::where('material_id', '=', $posts['material_id'])
+            ->where('user_id', '=', \Auth::id())
+            ->delete();
+        
+        // リダイレクト
+        return redirect( route('wishlist') );
+    }
+
+     // 全ての食材データを削除するボタンが押されたら
+     public function clear()
+     {
+         UserMaterial::where('user_id', '=', \Auth::id())->delete();
+ 
+         // リダイレクト
+         $message = "削除しました";
+         return redirect( route('my-materials') )->with('successMessage', $message);
+     }
+
+     public function clearWishlist()
+     {
+         Buy::where('user_id', '=', \Auth::id())->delete();
+ 
+         // リダイレクト
+         $message = "削除しました";
+         return redirect( route('wishlist') )->with('successMessage', $message);
+     }
 }
 

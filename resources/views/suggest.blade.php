@@ -7,12 +7,12 @@
     
     <div class="text-center">
         <div class="result__top mb-4"
-        style="background-image: linear-gradient(180deg, rgba(232,221,164, 0.6), 70%, rgba(235,231,210, 1)), url('{{ $panelImage[0] }}')">
+        style="background-image: linear-gradient(180deg, rgba(232,221,164, 0.6), 66.6%, rgba(235,231,210, 1)), url('{{ $panelImage[0] }}')">
             <p>あなたにオススメのメニューは...</p>
             <p class="result__top-menu">{{ $first_key }}</p>
             
             <h3 class="head-text mb-0">マッチ度</h3>
-            <div class="result__top-percent mb-4"><span>{{ $first_data }}</span>%</div>
+            <div class="result__top-percent mb-4"><span class="mr-1">{{ $first_data }}</span>%</div>
         
             
             <a href="/menu/{{ $first_id }}" class="mb-3">
@@ -21,27 +21,25 @@
         </div>
     </div>
 
-    @if($count < 7)
-    <div class="alert alert-danger m-4 d-flex align-items-center" role="alert">
+    @if($count < 10)
+    <div class="alert alert-danger m-4 d-flex align-items-center suggest-alert" role="alert">
         <i class="fas fa-exclamation-triangle mr-3"></i>
         <div class="alert-danger-text">食材が少ないため、正確な提案結果を取得できない可能性があります。</div>
     </div>
     @endif
     
-
-    <h3 class="head-text mb-4">詳細結果</h3>
-    <div class="result__graph">
+    <h3 class="result__graph-head mb-4">詳細結果 (上位10件)</h3>
+    <div class="result__graph mx-3">
         @foreach($sliceResult as $key => $data)
         <li class="result__graph-column row">
-            <div class="result__graph-menu col-4 p-0">
-                {{-- $loop->iterationはforeachのループした回数を取得するらしい（１から始まる） --}}
-                <a href="/menu/{{ $menu_idName[$loop->iteration-1] }}">
-                    <i class="result__graph-icon fas fa-search mr-1"></i>{{ $key }}
+            <div class="result__graph-menu col-4 px-0">
+                <a href="/menu/{{ $menu_idName[$loop->index] }}">
+                    <i class="result__graph-icon fas fa-search mx-1"></i><span class="result__graph-text">{{ $key }}</span>
                 </a>
             </div>
             <div class="col-8">
                 <div class="result__graph-percentBar" style="width:{{ $data }}%;">
-                    <span class="result__graph-percent">{{ $data }}</span>%
+                    <span class="result__graph-percent mr-1">{{ $data }}%</span>
                 </div>
             </div>
         </li>
