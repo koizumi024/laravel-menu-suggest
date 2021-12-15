@@ -543,7 +543,8 @@ class HomeController extends Controller
         }
         
         // リダイレクト
-        return redirect( route('suggest') );
+        $message = "削除しました";
+        return redirect( route('suggest') )->with('successMessage', $message);
     }
 
     public function deleteMaterial2(Request $request)
@@ -555,7 +556,8 @@ class HomeController extends Controller
             ->delete();
         
         // リダイレクト
-        return redirect( route('my-materials') );
+        $message = "削除しました";
+        return redirect( route('my-materials') )->with('successMessage', $message);
     }
 
     public function deleteWishlist2(Request $request)
@@ -567,7 +569,8 @@ class HomeController extends Controller
             ->delete();
         
         // リダイレクト
-        return redirect( route('wishlist') );
+        $message = "削除しました";
+        return redirect( route('wishlist') )->with('successMessage', $message);
     }
 
      // 全ての食材データを削除するボタンが押されたら

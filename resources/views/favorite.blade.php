@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<div id="app">
-    <h1 class="mb-4 text-center pt-4">お気に入りレシピ</h1>
-    <div class="recipe-container px-5 mt-4">
+<div id="app" class="container-md">
+    <h1 class="text-center py-4">お気に入りレシピ</h1>
+    <div class="recipe-container px-5">
 
         @if($favoriteCount == 0)
         <div class="my-meterial-list__empty text-center mt-4">登録されているレシピがありません</div>

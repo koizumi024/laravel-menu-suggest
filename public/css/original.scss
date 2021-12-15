@@ -1,10 +1,10 @@
-// Fonts
+// fonts
 @import url('https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap');
 
-// SCSS Colors
+// colors
 $white: #fff;
 $beige: #EBE7D2;
-$green: #4CAF50;
+$green: #93C47D;
 $aqua: #41C5AD;
 $blue: #8eb4cf;
 $orange: #FF8200;
@@ -14,19 +14,21 @@ $grey: #656565;
 $black: #222222;
 $red: #e76565;
 
-// SCSS Font Size
+// font-size
 $font-s: 0.83em;
 
 //width
 $width: 500px;
+$md: 768px;
 
-// hover
+// hover animation
 .result__graph-icon:hover, .result__graph-text:hover, .my-material-list__box-delete:hover, .clearBtn:hover, 
 .logout:hover, .footer__tab:hover, .primaryBtn:hover, .recipes__fav-btn:hover, .recipes__fav-btn-active:hover,
 .smallBtn:hover, .my-material__box:hover, .recipes__recipe:hover{
     opacity: .7;
     transition: opacity 0.15s ease-out;
 }
+
 // reset buttons
 .material__submitBtn, .material__submitBtn-hidden, .suggest__btn,
 .suggest__btn-secondary, .setting__btn, .clearBtn, .result__top-btn, .primaryBtn, .smallBtn,
@@ -38,25 +40,23 @@ $width: 500px;
     padding: 0;
     appearance: none;
 }
+
+.my-material__box, .my-material-list__box, .recipes__recipe, .message__box, .material__submitBtn{
+    box-shadow:
+    0 1.9px 2.5px rgba(0, 0, 0, 0.057),
+    0 5px 6.1px rgba(0, 0, 0, 0.076),
+    0 10.1px 11.4px rgba(0, 0, 0, 0.086);
+}
+
+.material__submitBtn, .material__submitBtn-hidden, .recipes__closeBtn, .logout{
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.15);
+}
+
 .primaryBtn{
     color: $white;
-    background-color: $aqua;
+    background-color: $yellow;
     border-radius: 80000px;
     padding: 10px 20px;
-}
-.secondaryBtn{
-    color: $aqua;
-    background-color: $white;
-    border: 1px solid $aqua;
-    border-radius: 80000px;
-    padding: 10px 20px;
-}
-.dangerBtn{
-    color: $white;
-    background-color: $red;
-    border-radius: 80000px;
-    padding: 10px 20px;
-    border: 1px solid $white;
 }
 .smallBtn{
     font-size: 0.8em;
@@ -83,13 +83,10 @@ body{
     font-family: 'Kiwi Maru', serif;
     color: $grey;
     font-size: 1.2em;
-    overflow: scroll;
-    -ms-overflow-style: none;    /* IE, Edge */
-    scrollbar-width: none;      /* Firefox */
 }
-body::-webkit-scrollbar {
-    display: none;   /* Chrome, Safari */
-  }
+#app{
+    padding-bottom: 70px;
+}
 #app:before{
     animation: fade_reverse 1s ease forwards;
     background: $beige;
@@ -110,6 +107,7 @@ body::-webkit-scrollbar {
 a:hover{
     text-decoration: none;
 }
+
 .message__box{
     margin: 20px;
     display: flex;
@@ -117,13 +115,12 @@ a:hover{
     align-items: center;
     padding: 10px 20px;
     background: $white;
-    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     width: $width - 40px;
     position: fixed;
     top: 0;
     z-index: 80000;
-    opacity: 0;
+    opacity: 1;
     animation: box-fade 5s ease forwards;
     transform: translateY(-150%);
 
@@ -132,30 +129,17 @@ a:hover{
         margin: 20px;
     }
 }
-@keyframes box-fade {
-    10% {
-      opacity: .95;
-      transform: translateY(0%);
-    }
-    75% {
-        opacity: .95;
-        transform: translateY(0%);
-      }
-    100% {
-        opacity: 0;
-        transform: translateY(-150%);
-      }
-}
 .message__icon{
     padding: 8px;
     border-radius: 50%;
-    color: #A0F7E7;
+    color: $white;
     background-color: $aqua;
 }
 .message__text{
     margin-left: 15px;
     color: $grey;
 }
+
 footer{
     display:flex;
     justify-content: space-evenly;
@@ -163,7 +147,7 @@ footer{
     position: fixed;
     background-color: $yellow;
     bottom: 0;
-    width: $width;
+    width: 100%;
     height: 120px;
     opacity: .99;
     z-index: 80000;
@@ -179,6 +163,10 @@ footer a:hover{
     text-align: center;
     padding: 0px;
     width: 100px;
+
+    @media (min-width: 1000px) {
+        width: 200px;
+    }
 }
 .footer__icon{
     color: rgba(130,130,130,0.82);
@@ -196,7 +184,6 @@ footer a:hover{
     text-align: center;
 }
 
-// Materials
 .categories {
     overflow: hidden;
     margin: 0 10px;
@@ -223,10 +210,7 @@ footer a:hover{
 }
 
 .materials{
-    margin-top: 25px;
-    margin-right: 15px;
-    margin-left: 15px;
-    margin-bottom: 180px;
+    margin: 40px 15px;
 }
 .materials__wrap{
     text-align: center;
@@ -263,10 +247,9 @@ footer a:hover{
     bottom: 120px;
     width: $width - 40px;
     color: $white;
-    background-color: $aqua;
+    background-color: $yellow;
     border-radius: 80000px;
     padding: 10px 20px;
-    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
     transition: 0.2s all;
     z-index: 100;
 
@@ -275,7 +258,7 @@ footer a:hover{
     }
 }
 .material__submitBtn:hover{
-    background-color: #54ceb7;
+    background-color: rgb(244,200,90);
 }
 .material__submitBtn-hidden{
     margin: 20px;
@@ -286,7 +269,6 @@ footer a:hover{
     background-color: #e76565;
     border-radius: 80000px;
     padding: 10px 20px;
-    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
     transition: 0.2s all;
 
     @media (max-width: $width) {
@@ -311,13 +293,12 @@ footer a:hover{
     color: $white;
     background-color: $grey;
 }
+
 .result__top{
     color: $black;
     padding: 35px;
     background-repeat: no-repeat;
     background-size: 100%;
-    opacity: 0;
-    animation: fade 1.5s forwards;
 }
 .result__top-menu{
     font-size: 1.8em;
@@ -335,16 +316,17 @@ footer a:hover{
     animation-delay: 0.8s;
 }
 .result__graph-head{
-    font-size: 16px;
-    text-align: center;
+    font-size: 18px;
     opacity: 0;
     animation: fade 1s forwards;
     animation-delay: 1.3s;
 }
 .result__graph{
-    margin-bottom: 150px;
     overflow: hidden;
     position: relative;
+    @media (min-width: $width) {
+        margin: 30px;
+    }
 }
 .result__graph:before{
     animation: right-move 1.5s ease forwards;
@@ -359,21 +341,6 @@ footer a:hover{
     position: absolute;
     z-index: 1;
 }
-@keyframes right-move {
-    100% {
-      transform: translateX(100%);
-    }
-}
-@keyframes fade {
-    100% {
-      opacity: 1;
-    }
-}
-@keyframes fade_reverse {
-    100% {
-      opacity: 0;
-    }
-}
 .result__graph-column{
     display: flex;
     margin-bottom: 15px;
@@ -387,18 +354,21 @@ footer a:hover{
 }
 .result__graph-icon{
     color: $white;
-    background-color: $aqua;
+    background-color: $yellow;
     padding: 6px;
     border-radius: 50%;
 }
 .result__graph-text{
-    color: $aqua;
+    color: $grey;
     font-size: 15px;
+}
+.result__graph-percentBar-bg{
+    background: rgba(122, 122, 122, 0.12);
 }
 .result__graph-percentBar{
     color: $white;
     font-size: 0.8em;
-    background-color: rgb(209, 115, 115);
+    background-color: $aqua;
     display:flex;
     justify-content: flex-end;
     align-items: center;
@@ -407,14 +377,8 @@ footer a:hover{
     height: 35px;
     overflow: hidden;
 }
-.recipe-container{
-    padding-bottom: 170px;
-}
+
 .recipes__recipe{
-    box-shadow:
-    0 1.9px 2.5px rgba(0, 0, 0, 0.057),
-    0 5px 6.1px rgba(0, 0, 0, 0.076),
-    0 10.1px 11.4px rgba(0, 0, 0, 0.086);
     overflow: hidden;
     border-radius: 10px;
 }
@@ -452,19 +416,21 @@ footer a:hover{
     font-size: 15px;
     z-index: 1;
 }
-.recipes__closeBtn{
-    margin: 20px;
+.button_bar{
     position: fixed;
     bottom: 120px;
+    width:100vw;
+    z-index: 1000;
+}
+.recipes__closeBtn{
     width: $width - 40px;
     color: $white;
     background-color: $grey;
     border-radius: 80000px;
+    margin:20px;
     padding: 10px 20px;
-    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
     transition: 0.2s all;
-    z-index: 100;
-
+    
     @media (max-width: $width) {
         width: 90vw;
     }
@@ -483,13 +449,9 @@ footer a:hover{
     animation: fade 3s forwards;
 }
 .my-material__box{
-    background-color: white;
+    background-color: $white;
     border-radius: 14px;
     color: $grey;
-    box-shadow:
-    0 1.9px 2.5px rgba(0, 0, 0, 0.057),
-    0 5px 6.1px rgba(0, 0, 0, 0.076),
-    0 10.1px 11.4px rgba(0, 0, 0, 0.086);
 }
 .my-material__box-title{
     color: $yellow;
@@ -516,34 +478,30 @@ footer a:hover{
     content: "";
     vertical-align: middle;
 }
-
-.sample5-3::before{
+.circle::before{
     width: 30px;
     height: 30px;
-    -webkit-border-radius: 50%;
     border-radius: 50%;
     background: $yellow;
 }
-.sample5-3::after{
+.circle::after{
     left: 9px;
     width: 9px;
     height: 9px;
     border-top: 3px solid $white;
     border-right: 3px solid $white;
-    -webkit-transform: rotate(45deg);
     transform: rotate(45deg);
 }
+
 .my-material-list{
-    margin-bottom: 150px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px,1fr));
+    grid-gap: 20px;
 }
 .my-material-list__box{
-    background-color: white;
+    background-color: $white;
     border-radius: 14px;
     color: $grey;
-    box-shadow:
-    0 1.9px 2.5px rgba(0, 0, 0, 0.057),
-    0 5px 6.1px rgba(0, 0, 0, 0.076),
-    0 10.1px 11.4px rgba(0, 0, 0, 0.086);
     display: inline-block;
     align-items: center;
     opacity: 0;
@@ -568,23 +526,34 @@ footer a:hover{
 .logout{
     width: 52px;
     height: 52px;
-    margin: 12px;
-    position: absolute;
+    margin: 15px;
+    position: fixed;
     right: 0;
     top: 0;
     background: $yellow;
     opacity: 0.9;
     border-radius: 15px;
     z-index: 1000;
+
+    @media (min-width: $md) {
+        width: 170px;
+    }
 }
-.logout a{
+.logout-text{
+    color: $white;
+    display: none;
+    @media (min-width: $md) {
+        display: inline;
+    }
+}
+.logout span{
 position: relative;
 display: block;
 width: 52px;
 height: 52px;
 text-decoration: none;
 }
-.logout a::before{
+.logout span::before{
 font-family: 'Font Awesome 5 Free';
 font-weight: 900;
 content: '\f2f5';
@@ -599,4 +568,34 @@ right: 0;
 left: 0;
 margin: 13px;
 text-align: center;
+}
+
+@keyframes box-fade {
+    10% {
+      opacity: .95;
+      transform: translateY(0%);
+    }
+    75% {
+        opacity: .95;
+        transform: translateY(0%);
+      }
+    100% {
+        opacity: 0;
+        transform: translateY(-150%);
+      }
+}
+@keyframes right-move {
+    100% {
+      transform: translateX(100%);
+    }
+}
+@keyframes fade {
+    100% {
+      opacity: 1;
+    }
+}
+@keyframes fade_reverse {
+    100% {
+      opacity: 0;
+    }
 }

@@ -6,7 +6,7 @@
 
 @section('content')
 
-<div id="app">
+<div id="app" class="container-md">
     <h1 class="mb-4 text-center pt-4">食材の更新</h1>
     
     <h3 class="head-text mb-3"><i class="fas fa-search mr-1"></i>カテゴリ選択</h3>

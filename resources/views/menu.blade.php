@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div id="app">
+<div id="app" class="container-md">
     <h1 class="mb-4 pt-4 text-center">{{ $selectedMenu['menu'] }}</h1>
     <h3 class="head-text mb-3">必要かも？</h3>
     <div class="need__materials mb-4">
@@ -39,7 +39,7 @@
                         <div class="recipes__recipe-menu d-flex align-items-center">
                             
                             <div class="recipes__recipe-dislike-alert mr-2 {{ in_array( $recipes[$loop->index]['rid'], $dislikeMenuList) ? '' : 'd-none' }}">
-                                嫌いな食材あり
+                                <i class="fas fa-exclamation-circle mr-2"></i>嫌いな食材あり
                             </div>
                             
                             <form class="favRecipe" action="{{ route('favRecipe') }}" method="POST">
@@ -61,9 +61,14 @@
         @endforeach
         
         
+        
     </div>
+
+        
+</div>
+<div class="button_bar d-flex justify-content-center">
     <a href="{{ route('suggest') }}">
-            <button class="recipes__closeBtn"><i class="fas fa-times mr-2"></i>終了する</button>
-        </a>
+        <button class="recipes__closeBtn"><i class="fas fa-times mr-2"></i>終了する</button>
+    </a>
 </div>
 @endsection

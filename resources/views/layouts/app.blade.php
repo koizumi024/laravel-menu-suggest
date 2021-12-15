@@ -27,17 +27,25 @@
 <body>
     <div id="app" class="bg-app">
         <!-- フラッシュメッセージ -->
-        @if (Session::has('successMessage'))
-        <div class="message__box">
-            <i class="fas fa-check message__icon"></i>
-            <div class="message__text">
-                {{ session('successMessage') }}
+        <div class="d-flex justify-content-center">
+            @if (Session::has('successMessage'))
+            <div class="message__box">
+                <i class="fas fa-check message__icon"></i>
+                <div class="message__text">
+                    {{ session('successMessage') }}
+                </div>
             </div>
+            @endif
         </div>
-        @endif
-
-        <div class="logout"><a href="{{ route('logout') }}" onclick="event.preventDefault();
-            document.getElementById('logout-form').submit();"></a></div>
+        
+        <!-- ログアウトボタン -->
+        <a href="{{ route('logout') }}" onclick="event.preventDefault();
+            document.getElementById('logout-form').submit();">
+            <div class="logout d-flex align-items-center">
+            
+            <span></span>
+            <div class="logout-text mr-1">ログアウト</div>
+        </div></a>
         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
             @csrf
         </form>

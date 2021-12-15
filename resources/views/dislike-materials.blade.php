@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<div id="app">
+<div id="app" class="container-md">
     <h1 class="mb-4 text-center pt-4">嫌いな食材の設定</h1>
     <h3 class="head-text mb-4"><i class="fas fa-search mr-1"></i>カテゴリ選択</h3>
     <div class="categories mb-4">
