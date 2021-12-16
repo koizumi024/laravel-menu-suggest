@@ -119,6 +119,8 @@ class HomeController extends Controller
     {
         // カテゴリ一覧を取得
         $categories = Category::select('categories.*')->get();
+        // 食材一覧を取得
+        $materials = Material::select('materials.*')->get();
         // 食材一覧を全て取得
         $materials_all = Material::select('materials.*')->get();
 
@@ -133,7 +135,7 @@ class HomeController extends Controller
             array_push($exclude_materials, $h['material_id']);
         }
 
-        return view('dislike-materials', compact('categories', 'materials_all', 'exclude_materials'));
+        return view('dislike-materials', compact('categories', 'materials_all', 'exclude_materials', 'materials'));
     }
 
     // 食材を更新した際に行う処理

@@ -32,7 +32,7 @@
     <div class="result__graph">
         @foreach($sliceResult as $key => $data)
         <li class="result__graph-column row">
-            <div class="result__graph-menu col-5 col-md-4 px-0">
+            <div class="result__graph-menu col-5 col-md-4 pr-1">
                 <a href="/menu/{{ $menu_idName[$loop->index] }}">
                     <i class="result__graph-icon fas fa-search mx-1"></i><span class="result__graph-text mr-2">{{ $key }}</span>
                 </a>

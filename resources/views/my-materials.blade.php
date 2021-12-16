@@ -32,12 +32,13 @@
     </div>
     
     <h4 class="text-center mt-5">マイ食材一覧（合計: {{ $count }}）</h3>
-    <div class="my-material-list py-3 px-5">
-        
-        @if($count == 0)
-        <div class="my-material-list__empty text-center mt-4">登録されている食材がありません</div>
-        @endif
+    
+    @if($count == 0)
+    <div class="my-material-list__empty text-center mt-4">登録されている食材がありません</div>
+    @endif
 
+    <div class="my-material-list py-3 px-3">
+        
         @foreach($user_materials as $u)
         <div class="my-material-list__box p-3 d-flex justify-content-between">
             <div class="left d-flex align-items-center">

@@ -24,7 +24,7 @@
     </div>
     
     <h2 class="mb-4 text-center">人気のレシピ</h1>
-    <div class="recipe-container px-5">
+    <div class="recipe-container px-3">
         {{-- <a href="https://recipe.rakuten.co.jp/search/{{ $selectedMenu['menu'] }}" target="_blank">
             <button class="primaryBtn"><i class="fas fa-external-link-alt mr-2"></i>楽天レシピで検索</button>
         </a> --}}

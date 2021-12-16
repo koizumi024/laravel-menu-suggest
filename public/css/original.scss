@@ -24,7 +24,7 @@ $md: 768px;
 // hover animation
 .result__graph-icon:hover, .result__graph-text:hover, .my-material-list__box-delete:hover, .clearBtn:hover, 
 .logout:hover, .footer__tab:hover, .primaryBtn:hover, .recipes__fav-btn:hover, .recipes__fav-btn-active:hover,
-.smallBtn:hover, .my-material__box:hover, .recipes__recipe:hover{
+.smallBtn:hover, .my-material__box:hover, .recipes__recipe:hover, .welcomeBtn:hover{
     opacity: .7;
     transition: opacity 0.15s ease-out;
 }
@@ -52,6 +52,7 @@ $md: 768px;
     box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.15);
 }
 
+
 .primaryBtn{
     color: $white;
     background-color: $yellow;
@@ -70,6 +71,7 @@ $md: 768px;
     color: $white;
     background-color: $yellow;
     border-radius: 80000px;
+    border: none;
     padding: 5px 10px;
     opacity: .5;
     cursor: auto;
@@ -85,7 +87,7 @@ body{
     font-size: 1.2em;
 }
 #app{
-    padding-bottom: 70px;
+    padding-bottom: 80px;
 }
 #app:before{
     animation: fade_reverse 1s ease forwards;
@@ -209,40 +211,37 @@ footer a:hover{
     cursor: auto;
 }
 
-.materials{
-    margin: 40px 15px;
-}
 .materials__wrap{
-    text-align: center;
-    justify-content: center;
-    display: flex;
-    flex-wrap: wrap;
-}
-.materials__content{
-    margin: 8px 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px,1fr));
+    grid-gap: 10px;
+    margin: 20px;
 }
 .material__img{
     width: 100px;
     height: 100px;
 }
 .materials__border{
+    margin: 0 auto;
     border: 7px solid $l-grey;
     border-radius: 50%;
     width: 115px;
     opacity: .5;
 }
 .materials__border-active{
+    margin: 0 auto;
     border: 7px solid $green;
     border-radius: 50%;
     width: 115px;
 }
 .material__name{
+    text-align: center;
     color: $black;
     margin-top: 1px;
     font-size: $font-s;
 }
 .material__submitBtn{
-    margin: 20px;
+    margin: 20px auto;
     position: fixed;
     bottom: 120px;
     width: $width - 40px;
@@ -351,6 +350,7 @@ footer a:hover{
     justify-content: flex-end;
     font-size: 0.8em;
     text-align: right;
+    
 }
 .result__graph-icon{
     color: $white;
@@ -361,9 +361,6 @@ footer a:hover{
 .result__graph-text{
     color: $grey;
     font-size: 15px;
-}
-.result__graph-percentBar-bg{
-    background: rgba(122, 122, 122, 0.12);
 }
 .result__graph-percentBar{
     color: $white;
@@ -495,7 +492,7 @@ footer a:hover{
 
 .my-material-list{
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px,1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px,1fr));
     grid-gap: 20px;
 }
 .my-material-list__box{

@@ -12,7 +12,7 @@
     <div class="my-material-list__empty text-center mt-4">登録されている食材がありません</div>
     @endif
 
-    <div class="my-material-list px-5">
+    <div class="my-material-list px-3">
         @foreach($wishlist as $w)
         <div class="my-material-list__box p-3 d-flex justify-content-between ">
             <div class="left d-flex align-items-center">

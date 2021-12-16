@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap");
 .result__graph-icon:hover, .result__graph-text:hover, .my-material-list__box-delete:hover, .clearBtn:hover,
 .logout:hover, .footer__tab:hover, .primaryBtn:hover, .recipes__fav-btn:hover, .recipes__fav-btn-active:hover,
-.smallBtn:hover, .my-material__box:hover, .recipes__recipe:hover {
+.smallBtn:hover, .my-material__box:hover, .recipes__recipe:hover, .welcomeBtn:hover {
   opacity: .7;
   -webkit-transition: opacity 0.15s ease-out;
   transition: opacity 0.15s ease-out;
@@ -50,6 +50,7 @@
   color: #fff;
   background-color: #F5BB44;
   border-radius: 80000px;
+  border: none;
   padding: 5px 10px;
   opacity: .5;
   cursor: auto;
@@ -66,7 +67,7 @@ body {
 }
 
 #app {
-  padding-bottom: 70px;
+  padding-bottom: 80px;
 }
 
 #app:before {
@@ -230,24 +231,13 @@ footer a:hover {
   cursor: auto;
 }
 
-.materials {
-  margin: 40px 15px;
-}
-
 .materials__wrap {
-  text-align: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-}
-
-.materials__content {
-  margin: 8px 10px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(120px, 1fr))[auto-fill];
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  grid-gap: 10px;
+  margin: 20px;
 }
 
 .material__img {
@@ -256,6 +246,7 @@ footer a:hover {
 }
 
 .materials__border {
+  margin: 0 auto;
   border: 7px solid #ccc;
   border-radius: 50%;
   width: 115px;
@@ -263,19 +254,21 @@ footer a:hover {
 }
 
 .materials__border-active {
+  margin: 0 auto;
   border: 7px solid #93C47D;
   border-radius: 50%;
   width: 115px;
 }
 
 .material__name {
+  text-align: center;
   color: #222222;
   margin-top: 1px;
   font-size: 0.83em;
 }
 
 .material__submitBtn {
-  margin: 20px;
+  margin: 20px auto;
   position: fixed;
   bottom: 120px;
   width: 460px;
@@ -431,10 +424,6 @@ footer a:hover {
 .result__graph-text {
   color: #656565;
   font-size: 15px;
-}
-
-.result__graph-percentBar-bg {
-  background: rgba(122, 122, 122, 0.12);
 }
 
 .result__graph-percentBar {
@@ -597,8 +586,8 @@ footer a:hover {
 .my-material-list {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (minmax(250px, 1fr))[auto-fill];
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  -ms-grid-columns: (minmax(300px, 1fr))[auto-fill];
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-gap: 20px;
 }
 

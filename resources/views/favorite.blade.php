@@ -3,7 +3,7 @@
 @section('content')
 <div id="app" class="container-md">
     <h1 class="text-center py-4">お気に入りレシピ</h1>
-    <div class="recipe-container px-5">
+    <div class="recipe-container px-3">
 
         @if($favoriteCount == 0)
         <div class="my-meterial-list__empty text-center mt-4">登録されているレシピがありません</div>
