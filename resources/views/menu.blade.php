@@ -23,12 +23,16 @@
         @endforeach
     </div>
     
-    <h2 class="mb-4 text-center">人気のレシピ</h1>
-    <div class="recipe-container px-3">
-        {{-- <a href="https://recipe.rakuten.co.jp/search/{{ $selectedMenu['menu'] }}" target="_blank">
-            <button class="primaryBtn"><i class="fas fa-external-link-alt mr-2"></i>楽天レシピで検索</button>
-        </a> --}}
+    <div class="rakuten-direct-link text-center my-4">
+        <a href="https://recipe.rakuten.co.jp/search/{{ $selectedMenu['menu'] }}" target="_blank">
+                <button class="primaryBtn"><i class="fas fa-external-link-alt mr-2"></i>{{ $selectedMenu['menu'] }}を楽天レシピで検索</button>
+        </a>
+    </div>
 
+    <h2 class="mb-4 text-center">人気のレシピ</h1>
+        
+        <div class="recipe-container px-3">
+            
         @foreach( $recipes as $r)
         <li class="recipes__recipe mb-3">
             <a href="https://recipe.rakuten.co.jp/recipe/{{ $recipes[$loop->index]['rid'] }}" target="_blank">
