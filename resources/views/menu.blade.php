@@ -1,3 +1,5 @@
+@section('title', 'メニューの詳細')
+
 @extends('layouts.app')
 
 @section('content')

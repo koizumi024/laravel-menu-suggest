@@ -1,3 +1,5 @@
+@section('title', '買い物リスト')
+
 @extends('layouts.app')
 
 @section('javascript')

@@ -1,3 +1,5 @@
+@section('title', 'マイ食材')
+
 @extends('layouts.app')
 
 @section('javascript')

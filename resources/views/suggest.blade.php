@@ -1,3 +1,5 @@
+@section('title', '提案結果')
+
 @extends('layouts.app')
 
 @section('content')

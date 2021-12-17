@@ -1,3 +1,5 @@
+@section('title', '嫌いな食材の設定')
+
 @extends('layouts.app')
 
 @section('javascript')

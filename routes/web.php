@@ -45,5 +45,3 @@ Route::get('/menu/{id}', [HomeController::class, 'loadMenuDetail'])->name('menu.
 Route::post('/menu/fav-recipe', [HomeController::class, 'favRecipe'])->name('favRecipe');
 Route::post('/menu/fav-recipe2', [HomeController::class, 'favRecipe2'])->name('favRecipe2');
 Route::post('/delete-material', [HomeController::class, 'deleteMaterial'])->name('delete-material');
-
-Route::get('/end', [HomeController::class, 'loadEnd'])->name('end');

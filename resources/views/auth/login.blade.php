@@ -1,3 +1,5 @@
+@section('title', 'ログイン')
+
 @extends('layouts.auth')
 
 @section('content')

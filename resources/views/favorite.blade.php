@@ -1,3 +1,5 @@
+@section('title', 'お気に入りレシピ')
+
 @extends('layouts.app')
 
 @section('content')

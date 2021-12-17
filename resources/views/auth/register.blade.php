@@ -1,7 +1,9 @@
+@section('title', '新規登録')
+
 @extends('layouts.auth')
 
 @section('content')
-<div class="container" style="display:inline-block;">
+<div class="container">
     <form method="POST" action="{{ route('register') }}" class="d-block">
         @csrf
         <div class="form-group">
