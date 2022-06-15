@@ -13,7 +13,7 @@
 `test@example.com`など
 
 ## 画面
-<img width="300" alt="ss1" src="https://i.imgur.com/ald8I4f.png"> <img width="300" alt="ss2" src="https://i.imgur.com/bFsOruZ.png"> <img width="300" alt="ss3" src="https://i.imgur.com/hGPAd9B.png">
+<img width="220" alt="ss1" src="https://i.imgur.com/ald8I4f.png"> <img width="220" alt="ss2" src="https://i.imgur.com/bFsOruZ.png"> <img width="220" alt="ss3" src="https://i.imgur.com/hGPAd9B.png">
 
 ## 技術
 ![PHP](https://img.shields.io/badge/PHP-f2f2f2.svg?logo=php&style=for-the-badge)
